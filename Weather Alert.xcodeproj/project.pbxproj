@@ -14,10 +14,12 @@
 		5F69701B1DD33B8200618FC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F6970191DD33B8200618FC0 /* LaunchScreen.storyboard */; };
 		5F6970261DD33B8200618FC0 /* Weather_AlertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6970251DD33B8200618FC0 /* Weather_AlertTests.swift */; };
 		5FB8A44F1DD497DD002FC8B9 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5FB8A44D1DD497DD002FC8B9 /* Model.xcdatamodeld */; };
-		5FD8CC2E1DD4991F000D4860 /* City+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8CC2C1DD4991F000D4860 /* City+CoreDataClass.swift */; };
-		5FD8CC2F1DD4991F000D4860 /* City+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8CC2D1DD4991F000D4860 /* City+CoreDataProperties.swift */; };
 		5FD8CC311DD49D7A000D4860 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8CC301DD49D7A000D4860 /* DataController.swift */; };
 		5FD8CC621DD4DB6A000D4860 /* DataControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8CC611DD4DB6A000D4860 /* DataControllerTests.swift */; };
+		5FD8CC651DD5C974000D4860 /* City+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8CC631DD5C974000D4860 /* City+CoreDataClass.swift */; };
+		5FD8CC661DD5C974000D4860 /* City+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8CC641DD5C974000D4860 /* City+CoreDataProperties.swift */; };
+		5FD8CC681DD5CE96000D4860 /* SeveralCities.json in Resources */ = {isa = PBXBuildFile; fileRef = 5FD8CC671DD5CE96000D4860 /* SeveralCities.json */; };
+		5FD8CC6A1DD5D110000D4860 /* SingleCity.json in Resources */ = {isa = PBXBuildFile; fileRef = 5FD8CC691DD5D110000D4860 /* SingleCity.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,10 +44,12 @@
 		5F6970251DD33B8200618FC0 /* Weather_AlertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather_AlertTests.swift; sourceTree = "<group>"; };
 		5F6970271DD33B8200618FC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5FB8A44E1DD497DD002FC8B9 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		5FD8CC2C1DD4991F000D4860 /* City+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "City+CoreDataClass.swift"; path = "CoreData/City+CoreDataClass.swift"; sourceTree = "<group>"; };
-		5FD8CC2D1DD4991F000D4860 /* City+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "City+CoreDataProperties.swift"; path = "CoreData/City+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5FD8CC301DD49D7A000D4860 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataController.swift; path = CoreData/DataController.swift; sourceTree = "<group>"; };
 		5FD8CC611DD4DB6A000D4860 /* DataControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataControllerTests.swift; sourceTree = "<group>"; };
+		5FD8CC631DD5C974000D4860 /* City+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "City+CoreDataClass.swift"; path = "CoreData/City+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5FD8CC641DD5C974000D4860 /* City+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "City+CoreDataProperties.swift"; path = "CoreData/City+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5FD8CC671DD5CE96000D4860 /* SeveralCities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SeveralCities.json; path = CoreData/SeveralCities.json; sourceTree = "<group>"; };
+		5FD8CC691DD5D110000D4860 /* SingleCity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleCity.json; path = CoreData/SingleCity.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +115,10 @@
 		5FB8A44C1DD497CA002FC8B9 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				5FD8CC2C1DD4991F000D4860 /* City+CoreDataClass.swift */,
-				5FD8CC2D1DD4991F000D4860 /* City+CoreDataProperties.swift */,
+				5FD8CC671DD5CE96000D4860 /* SeveralCities.json */,
+				5FD8CC691DD5D110000D4860 /* SingleCity.json */,
+				5FD8CC631DD5C974000D4860 /* City+CoreDataClass.swift */,
+				5FD8CC641DD5C974000D4860 /* City+CoreDataProperties.swift */,
 				5FB8A44D1DD497DD002FC8B9 /* Model.xcdatamodeld */,
 				5FD8CC301DD49D7A000D4860 /* DataController.swift */,
 			);
@@ -205,6 +211,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F69701B1DD33B8200618FC0 /* LaunchScreen.storyboard in Resources */,
+				5FD8CC681DD5CE96000D4860 /* SeveralCities.json in Resources */,
+				5FD8CC6A1DD5D110000D4860 /* SingleCity.json in Resources */,
 				5F6970181DD33B8200618FC0 /* Assets.xcassets in Resources */,
 				5F6970161DD33B8200618FC0 /* Main.storyboard in Resources */,
 			);
@@ -224,12 +232,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FD8CC2F1DD4991F000D4860 /* City+CoreDataProperties.swift in Sources */,
 				5FD8CC311DD49D7A000D4860 /* DataController.swift in Sources */,
-				5FD8CC2E1DD4991F000D4860 /* City+CoreDataClass.swift in Sources */,
 				5F6970131DD33B8200618FC0 /* ViewController.swift in Sources */,
 				5F6970111DD33B8200618FC0 /* AppDelegate.swift in Sources */,
 				5FB8A44F1DD497DD002FC8B9 /* Model.xcdatamodeld in Sources */,
+				5FD8CC661DD5C974000D4860 /* City+CoreDataProperties.swift in Sources */,
+				5FD8CC651DD5C974000D4860 /* City+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,7 +2,7 @@
 //  City+CoreDataProperties.swift
 //  Weather Alert
 //
-//  Created by Aleksandr Kelbas on 10/11/2016.
+//  Created by Aleksandr Kelbas on 11/11/2016.
 //  Copyright © 2016 UKFast. All rights reserved.
 //
 
@@ -16,5 +16,12 @@ extension City {
         return NSFetchRequest<City>(entityName: "City");
     }
 
+    @NSManaged public var deg: NSDecimalNumber?
+    @NSManaged public var name: String?
+    @NSManaged public var speed: NSDecimalNumber?
+    @NSManaged public var lon: NSDecimalNumber?
+    @NSManaged public var lat: NSDecimalNumber?
+    @NSManaged public var country: String?
+    @NSManaged public var id: Int16
 
 }
