@@ -11,18 +11,18 @@ import CoreData
 
 class DataController {
     
-    lazy var applicationDocumentsDirectory: URL = {
+    fileprivate lazy var applicationDocumentsDirectory: URL = {
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return urls.last!
     }()
     
-    lazy var managedObjectModel: NSManagedObjectModel = {
+    fileprivate lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
         let modelURL = Bundle.main.url(forResource: "Model", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
 
-    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+    fileprivate lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
@@ -57,7 +57,7 @@ class DataController {
 
     
     
-    lazy var managedObjectContext: NSManagedObjectContext = {
+    fileprivate(set) lazy var managedObjectContext: NSManagedObjectContext = {
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
@@ -67,4 +67,19 @@ class DataController {
 
     
     init() {}
+    
+    public func wasInitialised() -> Bool {
+        guard applicationDocumentsDirectory != nil else {
+            return false
+        }
+        guard managedObjectModel != nil else {
+            return false
+        }
+        guard persistentStoreCoordinator != nil else {
+            return false
+        }
+        return true
+    }
+    
+    
 }

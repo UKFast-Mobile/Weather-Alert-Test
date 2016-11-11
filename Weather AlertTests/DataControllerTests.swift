@@ -26,10 +26,9 @@ class DataControllerTests: XCTestCase {
         
         let dataController = DataController()
         
-        XCTAssertNotNil(dataController.applicationDocumentsDirectory)
-        XCTAssertNotNil(dataController.managedObjectModel)
+        
         XCTAssertNotNil(dataController.managedObjectContext)
-        XCTAssertNotNil(dataController.persistentStoreCoordinator)
+        XCTAssertTrue(dataController.wasInitialised())
     }
     
 }
