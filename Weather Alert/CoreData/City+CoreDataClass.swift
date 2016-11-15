@@ -21,38 +21,22 @@ public class City: NSManagedObject {
         
 //        Data(contentsOf: <#T##URL#>, options: <#T##Data.ReadingOptions#>)
         
-        if let path = Bundle.main.url(forResource: "SingleCity", withExtension: "json") {
-            do {
-                if let jsonData = try Data(contentsOf: path, options: .dataReadingMapped, Error: nil)? {
-                    if let jsonResult: Dictionary = JSONSerialization.data(withJSONObject: jsonData, options: JSONSerialization.WritingOptions) as? Dictionary {
-                        if let citys : Array = jsonResult["city"] as? Array {
-                            
-                        }
-                        
-                    }
-                }
-                catch {
-                    
-                }
-                
-            }
-            
-        }
-        
         do {
-            guard let path = Bundle.main.url(forResource: "SingleCity", withExtension: "json")
-                else {
-                    // TODO: Throw Error
-            }
-            guard let jsonData = try Data(contentsOf: path, options: .dataReadingMapped)
-                else {
-                    // TODO: Throw Error
+            let path = Bundle.main.url(forResource: "SingleCity", withExtension: "json")
+            let jsonData = try? Data(contentsOf: path!, options: Data.ReadingOptions.mappedIfSafe)
+            
+            if let jsonResult: [String : Any] = try JSONSerialization.jsonObject(with: jsonData!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String : Any] {
+                id = jsonResult["id"] as! Int16
+                name = jsonResult["name"] as? String
+                country = jsonResult["country"] as? String
+                deg = jsonResult["deg"] as? NSDecimalNumber
+                lon = jsonResult["lon"] as? NSDecimalNumber
+                lat = jsonResult["lat"] as? NSDecimalNumber
+                speed = jsonResult["speed"] as? NSDecimalNumber
             }
             
         } catch {
-            
+            print("Stopped at City")
         }
-        
     }
-    
 }
