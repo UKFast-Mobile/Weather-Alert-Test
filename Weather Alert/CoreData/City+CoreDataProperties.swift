@@ -22,6 +22,6 @@ extension City {
     @NSManaged public var lon: NSNumber?
     @NSManaged public var lat: NSNumber?
     @NSManaged public var country: String?
-    @NSManaged public var id: NSNumber!
+    @NSManaged public var id: NSNumber?
 
 }

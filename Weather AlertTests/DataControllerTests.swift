@@ -49,7 +49,7 @@ class DataControllerTests: XCTestCase {
             object.mapping(json: jsonResult!)
             
             XCTAssertNotNil(object.id, "id shouldnt be nil")
-            XCTAssertTrue(object.id.intValue == 2643743, "id is incorrect")
+            XCTAssertTrue(object.id?.intValue == 2643743, "id is incorrect")
             
             XCTAssertNotNil(object.name, "name shouldnt be nil")
             XCTAssertEqual(object.name, "London", "name is incorrect")
@@ -121,13 +121,5 @@ class DataControllerTests: XCTestCase {
         }
     }
     
-    func loadJson(jsonFile: String) -> [String : Any]? {
-        
-        guard let path = Bundle.main.url(forResource: jsonFile, withExtension: "json"),
-            let jsonData = try? Data(contentsOf: path, options: Data.ReadingOptions.mappedIfSafe),
-            let jsonResult: [String : Any]? = try? JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments) as? [String : Any]
-            else { return nil }
-        
-        return jsonResult
-    }
+
 }
