@@ -121,5 +121,22 @@ class DataControllerTests: XCTestCase {
         }
     }
     
-
+    func testEntities() {
+        
+        let exp = expectation(description: "Retrieved entities successfully")
+                
+        exp.fulfill()
+        
+        waitForExpectations(timeout: 10.0) { (err) in
+            XCTAssertNil(err)
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 }

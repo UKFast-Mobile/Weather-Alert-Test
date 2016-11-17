@@ -80,6 +80,25 @@ class DataController {
         }
         return true
     }
+}
+
+extension DataController {
     
+    var entities: [NSEntityDescription] {
+        return managedObjectModel.entities
+    }
+}
+extension NSManagedObjectContext {
     
+    func saveContext() {
+        if hasChanges {
+            do {
+                try self.save()
+            } catch {
+                let nserror = error as NSError
+                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+                abort()
+            }
+        }
+    }
 }
