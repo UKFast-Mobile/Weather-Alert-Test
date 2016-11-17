@@ -121,22 +121,15 @@ class DataControllerTests: XCTestCase {
         }
     }
     
-    func testEntities() {
-        
-        let exp = expectation(description: "Retrieved entities successfully")
-                
-        exp.fulfill()
-        
-        waitForExpectations(timeout: 10.0) { (err) in
-            XCTAssertNil(err)
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
+//    func testFetchCity() {
+//        let employeesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "City")
+//        
+//        do {
+//            let fetchedCities = try dataController.managedObjectContext.fetch(employeesFetch)
+//            print(fetchedCities)
+//        } catch {
+//            fatalError("Failed to fetch employees: \(error)")
+//        }
+//    }
     
 }

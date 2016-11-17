@@ -80,20 +80,60 @@ class DataController {
         }
         return true
     }
+    
+    fileprivate lazy var sharedBackgroundContext: NSManagedObjectContext = {
+        let backMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        backMOC.parent = self.managedObjectContext
+        return backMOC
+    }()
 }
 
 extension DataController {
     
-    var entities: [NSEntityDescription] {
-        return managedObjectModel.entities
+    // MARK: - Variables
+    
+    var backgroudManagedObjectContext: NSManagedObjectContext {
+        return sharedBackgroundContext
     }
+    
+    // MARK: - Functions
+    
+    func fetchEntity(entityName: String) -> [Any] {
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        
+        do {
+            if let fetchedResult = try? self.managedObjectContext.fetch(fetch) {
+                return fetchedResult
+            }
+        } catch {
+            fatalError("Failed to fetch \(entityName): \(error)")
+        }
+        
+        return [Any]()
+    }
+    
+    func cleanDatabase() {
+        deleteAllObjectsOfEntity("City")
+    }
+    
+    func deleteAllObjectsOfEntity(_ entityName: String) {
+        let fRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        let results = try? backgroudManagedObjectContext.fetch(fRequest)
+        results?.forEach{ backgroudManagedObjectContext.delete($0) }
+        backgroudManagedObjectContext.saveContext(saveParent: true)
+    }
+    
 }
+
 extension NSManagedObjectContext {
     
-    func saveContext() {
+    func saveContext(saveParent: Bool = false) {
         if hasChanges {
             do {
                 try self.save()
+                if saveParent {
+                    self.parent?.saveContext()
+                }
             } catch {
                 let nserror = error as NSError
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
