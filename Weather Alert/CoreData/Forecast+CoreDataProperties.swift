@@ -11,7 +11,6 @@ import CoreData
 
 
 extension Forecast {
-
     @NSManaged public var date: NSNumber?
 
 }

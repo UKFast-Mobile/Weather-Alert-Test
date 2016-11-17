@@ -2,13 +2,13 @@
 //  Forecast+CoreDataClass.swift
 //  Weather Alert
 //
-//  Created by Jack Hopkins on 17/11/2016.
+//  Created by Jack Hopkins on 15/11/2016.
 //  Copyright © 2016 UKFast. All rights reserved.
+//  This file was automatically generated and should not be edited.
 //
 
 import Foundation
 import CoreData
-
 
 public class Forecast: City {
     
@@ -33,7 +33,7 @@ public class Forecast: City {
             date = ob["dt"] as? NSNumber
             deg = ob["deg"] as? NSNumber
             speed = ob["speed"] as? NSNumber
-            
+         
         }
     }
 }
