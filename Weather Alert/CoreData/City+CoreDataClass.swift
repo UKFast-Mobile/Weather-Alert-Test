@@ -11,8 +11,7 @@ import CoreData
 
 
 public class City: NSManagedObject {
-
-    @NSManaged public var name: String?
     
-
+    func mapping(json: [String : Any]) {
+    }
 }
