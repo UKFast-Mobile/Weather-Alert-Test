@@ -33,12 +33,19 @@ class DataControllerTests: XCTestCase {
         XCTAssertTrue(dataController.wasInitialised())
     }
     
+<<<<<<< HEAD
+    func testMapForecast() {
+=======
     func testMapSingleCity() {
+>>>>>>> develop
         
         let exp = expectation(description: "JSON converted to object successfully")
         
         DispatchQueue.global().async {
             
+<<<<<<< HEAD
+            let jsonResult = self.loadJson(jsonFile: "Forecast")
+=======
             let jsonResult = self.loadJson(jsonFile: "SingleCity")
             XCTAssertNotNil(jsonResult, "Failed to load file")
             
@@ -87,6 +94,7 @@ class DataControllerTests: XCTestCase {
         DispatchQueue.global().async {
             
             let jsonResult = self.loadJson(jsonFile: "SeveralCities")
+>>>>>>> develop
             XCTAssertNotNil(jsonResult, "Failed to load file")
             
             let list = jsonResult!["list"] as? [[String : Any]]
@@ -97,6 +105,18 @@ class DataControllerTests: XCTestCase {
             
             XCTAssertTrue(list!.count == count!, "List elements count doesnt match count variable")
             
+<<<<<<< HEAD
+            for (idx, _) in list!.enumerated() {
+                
+                let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "Forecast", in: self.dataController.managedObjectContext)
+                XCTAssertNotNil(entity, "Entity could not be found")
+                
+                let object = Forecast(entity: entity!, insertInto: self.dataController.managedObjectContext)
+                
+                object.mapping(json: jsonResult!, count: idx)
+                
+                XCTAssertNotNil(object.id, "id shouldnt be nil")
+=======
             let idsToCompare: [NSNumber] = [524901, 703448, 2643743]
             
             for (idx, json) in list!.enumerated() {
@@ -110,6 +130,7 @@ class DataControllerTests: XCTestCase {
                 
                 XCTAssertNotNil(object.id, "id shouldnt be nil")
                 XCTAssertEqual(object.id, idsToCompare[idx], "id shouldnt be nil")
+>>>>>>> develop
             }
             
             exp.fulfill()
@@ -121,43 +142,8 @@ class DataControllerTests: XCTestCase {
         }
     }
     
+<<<<<<< HEAD
+=======
 
-    func testMapForecast() {
-        
-        let exp = expectation(description: "JSON converted to object successfully")
-        
-        DispatchQueue.global().async {
-            
-            let jsonResult = self.loadJson(jsonFile: "Forecast")
-            XCTAssertNotNil(jsonResult, "Failed to load file")
-            
-            let list = jsonResult!["list"] as? [[String : Any]]
-            XCTAssertNotNil(list, "List of cities cannot be extracted")
-            
-            let count = jsonResult!["cnt"] as? Int
-            XCTAssertNotNil(count, "Count cannot be extracted")
-            
-            XCTAssertTrue(list!.count == count!, "List elements count doesnt match count variable")
-            
-            for (idx, _) in list!.enumerated() {
-                
-                let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "Forecast", in: self.dataController.managedObjectContext)
-                XCTAssertNotNil(entity, "Entity could not be found")
-                
-                let object = Forecast(entity: entity!, insertInto: self.dataController.managedObjectContext)
-                
-                object.mapping(json: jsonResult!, count: idx)
-                
-                XCTAssertNotNil(object.id, "id shouldnt be nil")
-            }
-            
-            exp.fulfill()
-            
-        }
-        
-        waitForExpectations(timeout: 10.0) { (err) in
-            XCTAssertNil(err)
-        }
-    }
-    
+>>>>>>> develop
 }
