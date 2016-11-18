@@ -1,5 +1,5 @@
 //
-//  Forecast+CoreDataProperties.swift
+//  NetworkRequest.swift
 //  Weather Alert
 //
 //  Created by Jack Hopkins on 17/11/2016.
@@ -7,12 +7,3 @@
 //
 
 import Foundation
-import CoreData
-
-
-
-extension Forecast {
-
-    @NSManaged public var date: NSNumber?
-
-}

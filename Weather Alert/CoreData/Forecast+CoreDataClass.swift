@@ -10,22 +10,25 @@
 import Foundation
 import CoreData
 
-@objc(Forecast)
-public class Forecast: NSManagedObject {
-    func mapping(json: [String : Any]) {
+public class Forecast: City {
+    
+    internal func mapping(json: [String : Any], count: Int) {
         
-        if let city = json[]
-        id = json ["id"] as? NSNumber
-        name = json["name"] as? String
+        guard let city = json["city"] as? [String : Any], let list = json["list"] as? [[String : Any]]
+            else { return }
         
-        if let sys = json["sys"] as? [String : Any] {
-            country = sys["country"] as? String
-            
-        }
+        guard let coord = city["coord"] as? [String : Any]
+            else { return }
         
-        if let coord = json["coord"] as? [String : Any] {
-            lon = coord["lon"] as? NSNumber
-            lat = coord["lat"] as? NSNumber
-        }
+        let day = list[count]
+        
+        id = city["id"] as? NSNumber
+        name = city["name"] as? String
+        country = city["country"] as? String
+        date = day["dt"] as? NSNumber
+        deg = day["deg"] as? NSNumber
+        speed = day["speed"] as? NSNumber
+        lon = coord["lon"] as? NSNumber
+        lat = coord["lat"] as? NSNumber
     }
 }
