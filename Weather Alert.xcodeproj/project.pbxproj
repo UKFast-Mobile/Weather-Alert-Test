@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A4E59901DDF113D0001BF6F /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4E598F1DDF113D0001BF6F /* Networking.swift */; };
+		1A4E59921DDF1C930001BF6F /* ForecastRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4E59911DDF1C930001BF6F /* ForecastRequest.swift */; };
 		1A4FD87B1DDDAC3E0096C901 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4FD87A1DDDAC3E0096C901 /* TestHelper.swift */; };
+		1AA7E92C1DE348D000B49121 /* City+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA7E92A1DE348D000B49121 /* City+CoreDataClass.swift */; };
+		1AA7E92D1DE348D000B49121 /* City+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA7E92B1DE348D000B49121 /* City+CoreDataProperties.swift */; };
+		1AB7627D1DE3133F00DB8FBF /* SingleCityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7627C1DE3133F00DB8FBF /* SingleCityRequest.swift */; };
 		5F6970111DD33B8200618FC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6970101DD33B8200618FC0 /* AppDelegate.swift */; };
 		5F6970131DD33B8200618FC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6970121DD33B8200618FC0 /* ViewController.swift */; };
 		5F6970161DD33B8200618FC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F6970141DD33B8200618FC0 /* Main.storyboard */; };
@@ -17,8 +22,6 @@
 		5FB8A44F1DD497DD002FC8B9 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5FB8A44D1DD497DD002FC8B9 /* Model.xcdatamodeld */; };
 		5FD8CC311DD49D7A000D4860 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8CC301DD49D7A000D4860 /* DataController.swift */; };
 		5FD8CC621DD4DB6A000D4860 /* DataControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8CC611DD4DB6A000D4860 /* DataControllerTests.swift */; };
-		5FD8CC651DD5C974000D4860 /* City+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8CC631DD5C974000D4860 /* City+CoreDataClass.swift */; };
-		5FD8CC661DD5C974000D4860 /* City+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8CC641DD5C974000D4860 /* City+CoreDataProperties.swift */; };
 		5FD8CC681DD5CE96000D4860 /* SeveralCities.json in Resources */ = {isa = PBXBuildFile; fileRef = 5FD8CC671DD5CE96000D4860 /* SeveralCities.json */; };
 		5FD8CC6A1DD5D110000D4860 /* SingleCity.json in Resources */ = {isa = PBXBuildFile; fileRef = 5FD8CC691DD5D110000D4860 /* SingleCity.json */; };
 /* End PBXBuildFile section */
@@ -34,7 +37,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A4E598F1DDF113D0001BF6F /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Networking.swift; path = Networking/Networking.swift; sourceTree = "<group>"; };
+		1A4E59911DDF1C930001BF6F /* ForecastRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForecastRequest.swift; path = Networking/ForecastRequest.swift; sourceTree = "<group>"; };
 		1A4FD87A1DDDAC3E0096C901 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
+		1AA7E92A1DE348D000B49121 /* City+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "City+CoreDataClass.swift"; path = "CoreData/City+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1AA7E92B1DE348D000B49121 /* City+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "City+CoreDataProperties.swift"; path = "CoreData/City+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1AB7627C1DE3133F00DB8FBF /* SingleCityRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleCityRequest.swift; path = Networking/SingleCityRequest.swift; sourceTree = "<group>"; };
 		5F69700D1DD33B8200618FC0 /* Weather Alert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Alert.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F6970101DD33B8200618FC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F6970121DD33B8200618FC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,8 +56,6 @@
 		5FB8A44E1DD497DD002FC8B9 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5FD8CC301DD49D7A000D4860 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataController.swift; path = CoreData/DataController.swift; sourceTree = "<group>"; };
 		5FD8CC611DD4DB6A000D4860 /* DataControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataControllerTests.swift; sourceTree = "<group>"; };
-		5FD8CC631DD5C974000D4860 /* City+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "City+CoreDataClass.swift"; path = "CoreData/City+CoreDataClass.swift"; sourceTree = "<group>"; };
-		5FD8CC641DD5C974000D4860 /* City+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "City+CoreDataProperties.swift"; path = "CoreData/City+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5FD8CC671DD5CE96000D4860 /* SeveralCities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SeveralCities.json; path = CoreData/SeveralCities.json; sourceTree = "<group>"; };
 		5FD8CC691DD5D110000D4860 /* SingleCity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SingleCity.json; path = CoreData/SingleCity.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +78,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A4E598C1DDF11100001BF6F /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				1A4E598F1DDF113D0001BF6F /* Networking.swift */,
+				1A4E59911DDF1C930001BF6F /* ForecastRequest.swift */,
+				1AB7627C1DE3133F00DB8FBF /* SingleCityRequest.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		5F6970041DD33B8200618FC0 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +109,7 @@
 		5F69700F1DD33B8200618FC0 /* Weather Alert */ = {
 			isa = PBXGroup;
 			children = (
+				1A4E598C1DDF11100001BF6F /* Networking */,
 				5FB8A44C1DD497CA002FC8B9 /* Storage */,
 				5F6970101DD33B8200618FC0 /* AppDelegate.swift */,
 				5F6970121DD33B8200618FC0 /* ViewController.swift */,
@@ -118,10 +135,10 @@
 		5FB8A44C1DD497CA002FC8B9 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				1AA7E92A1DE348D000B49121 /* City+CoreDataClass.swift */,
+				1AA7E92B1DE348D000B49121 /* City+CoreDataProperties.swift */,
 				5FD8CC671DD5CE96000D4860 /* SeveralCities.json */,
 				5FD8CC691DD5D110000D4860 /* SingleCity.json */,
-				5FD8CC631DD5C974000D4860 /* City+CoreDataClass.swift */,
-				5FD8CC641DD5C974000D4860 /* City+CoreDataProperties.swift */,
 				5FB8A44D1DD497DD002FC8B9 /* Model.xcdatamodeld */,
 				5FD8CC301DD49D7A000D4860 /* DataController.swift */,
 			);
@@ -235,12 +252,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AA7E92C1DE348D000B49121 /* City+CoreDataClass.swift in Sources */,
+				1AA7E92D1DE348D000B49121 /* City+CoreDataProperties.swift in Sources */,
+				1AB7627D1DE3133F00DB8FBF /* SingleCityRequest.swift in Sources */,
+				1A4E59921DDF1C930001BF6F /* ForecastRequest.swift in Sources */,
 				5FD8CC311DD49D7A000D4860 /* DataController.swift in Sources */,
 				5F6970131DD33B8200618FC0 /* ViewController.swift in Sources */,
+				1A4E59901DDF113D0001BF6F /* Networking.swift in Sources */,
 				5F6970111DD33B8200618FC0 /* AppDelegate.swift in Sources */,
 				5FB8A44F1DD497DD002FC8B9 /* Model.xcdatamodeld in Sources */,
-				5FD8CC661DD5C974000D4860 /* City+CoreDataProperties.swift in Sources */,
-				5FD8CC651DD5C974000D4860 /* City+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

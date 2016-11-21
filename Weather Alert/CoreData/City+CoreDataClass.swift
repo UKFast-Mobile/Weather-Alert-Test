@@ -19,7 +19,7 @@ public class City: NSManagedObject {
         
         if let sys = json["sys"] as? [String : Any] {
             country = sys["country"] as? String
-
+            
         }
         
         if let coord = json["coord"] as? [String : Any] {
@@ -32,4 +32,5 @@ public class City: NSManagedObject {
             speed = wind["speed"] as? NSNumber
         }
     }
+    
 }
