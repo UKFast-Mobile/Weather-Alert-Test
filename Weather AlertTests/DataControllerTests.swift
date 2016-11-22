@@ -12,7 +12,10 @@ import CoreData
 
 class DataControllerTests: XCTestCase {
     
-    let dataController = DataController()
+    // NOTE: Uncomment when merge
+    var dataController = DataController()
+    //  var dataController: DataController { return AppShared.instances.dataController }
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.

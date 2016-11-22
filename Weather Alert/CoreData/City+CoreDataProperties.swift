@@ -15,6 +15,26 @@ extension City {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<City> {
         return NSFetchRequest<City>(entityName: "City");
     }
+    
+    public var direction: String {
+        
+        if let direct: Int = deg as? Int {
+            
+            if direct > 315 || direct <= 45 {
+                return "North"
+            } else if direct > 45 && direct <= 135 {
+                return "East"
+            } else if direct > 135 && direct <= 225 {
+                return "South"
+            } else if direct > 225 && direct <= 315 {
+                return "West"
+            } else {
+                return "Unknown"
+            }
+        } else {
+            return "Unknown"
+        }
+    }
 
     @NSManaged public var country: String?
     @NSManaged public var deg: NSNumber?
@@ -23,5 +43,5 @@ extension City {
     @NSManaged public var lon: NSNumber?
     @NSManaged public var name: String?
     @NSManaged public var speed: NSNumber?
-
+    
 }
