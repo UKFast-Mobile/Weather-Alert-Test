@@ -16,14 +16,26 @@ class ForecastRequest: NetworkingRequest {
         path = "/forecast/daily?id=\(cityId)"
     }
     
-    func response(completionHandler: @escaping (Forecast) -> Void) {
+    func response(completionHandler: @escaping ([Forecast]) -> Void) {
+        
+        var objects: [Forecast] = []
+        
         super.handleResponse() { result in
             
-            let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "Forecast", in: self.dataController.managedObjectContext)
-            let object = Forecast(entity: entity!, insertInto: self.dataController.managedObjectContext)
             
-            object.mapping(json: result!)
-            completionHandler(object)
+            let list = result!["list"] as? [[String : Any]]
+            
+            for (idx, _) in list!.enumerated() {
+                
+                let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "Forecast", in: self.dataController.managedObjectContext)
+                
+                let object = Forecast(entity: entity!, insertInto: self.dataController.managedObjectContext)
+                
+                object.mapping(json: result!, count: idx)
+                objects.append(object)
+            }
+            
+            completionHandler(objects)
         }
     }
     

@@ -167,7 +167,11 @@ class DataControllerTests: XCTestCase {
     func testForecastRequest() {
         let exp = expectation(description: "Forecast request failed")
         
-        if true {
+        let city = ForecastRequest(cityId: 524901)
+        
+        city.response() { result in
+            XCTAssertEqual(result[0].country, "RU")
+            XCTAssertEqual(result[0].name, "Moscow")
             exp.fulfill()
         }
         
@@ -179,7 +183,7 @@ class DataControllerTests: XCTestCase {
     
     
     func testSingleCityRequest() {
-        let exp = expectation(description: "Forecast request failed")
+        let exp = expectation(description: "Single city request failed")
         
         let city = SingleCityRequest(cityId: 524901)
         
