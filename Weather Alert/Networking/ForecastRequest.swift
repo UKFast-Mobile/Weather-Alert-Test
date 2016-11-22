@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class ForecastRequest: NetworkingRequest {
     
@@ -15,19 +16,15 @@ class ForecastRequest: NetworkingRequest {
         path = "/forecast/daily?id=\(cityId)"
     }
     
-    // TODO:: Uncomment after Forecast is added
-    
-//    func response(completionHandler: @escaping ([String : Any]?) -> Void) {
-//        super.handleResponse() { result in
-//            
-//            let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "Forecast", in: self.dataController.managedObjectContext)
-//            let object = Forecast(entity: entity!, insertInto: self.dataController.managedObjectContext)
-//            
-//            object.mapping(json: result!)
-//            
-//            let res = object.dataToDictionary()
-//            completionHandler(res)
-//        }
-//    }
+    func response(completionHandler: @escaping (Forecast) -> Void) {
+        super.handleResponse() { result in
+            
+            let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "Forecast", in: self.dataController.managedObjectContext)
+            let object = Forecast(entity: entity!, insertInto: self.dataController.managedObjectContext)
+            
+            object.mapping(json: result!)
+            completionHandler(object)
+        }
+    }
     
 }

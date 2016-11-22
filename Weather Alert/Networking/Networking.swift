@@ -16,7 +16,8 @@ open class NetworkingRequest {
     public var path: String
     public var response: [String : Any]?
     
-    private var networking: Networking { return AppShared.instances.networking }
+    var networking: Networking { return AppShared.instances.networking }
+    var dataController: DataController { return AppShared.instances.dataController }
     
     init() {
         path = "weather?id=1000006"

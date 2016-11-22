@@ -11,8 +11,6 @@ import CoreData
 
 class SingleCityRequest: NetworkingRequest {
     
-    let dataController = DataController()
-    
     init(cityId: Int) {
         super.init()
         path = "/weather?id=\(cityId)"
