@@ -9,23 +9,6 @@
 import Foundation
 import CoreData
 
-class Networking {
-    
-    // MARK: Variables
-    
-    static let inst = Networking()
-    
-    let config: URLSessionConfiguration
-    let session: URLSession
-    let appId: String
-    
-    init() {
-        self.config = URLSessionConfiguration.default
-        self.session = URLSession(configuration: self.config)
-        self.appId = "95fcc97498d7e406f5467cf3dc17f577"
-    }
-}
-
 open class NetworkingRequest {
     
     // MARK: Variables
@@ -33,15 +16,17 @@ open class NetworkingRequest {
     public var path: String
     public var response: [String : Any]?
     
+    private var networking: Networking { return AppShared.instances.networking }
+    
     init() {
-        path = ""
+        path = "weather?id=1000006"
     }
     
     // MARK: Functions
     
     func handleResponse(completionHandler: @escaping ([String: Any]?) -> Void) {
-        let fullPath = URL(string: "http://api.openweathermap.org/data/2.5\(path)" + "&appid=\(Networking.inst.appId)")!
-        let task = Networking.inst.session.dataTask(with: fullPath, completionHandler: {
+        let fullPath = URL(string: "http://api.openweathermap.org/data/2.5\(path)&appid=\(networking.appId)")
+        let task = networking.session.dataTask(with: fullPath!, completionHandler: {
             (data, response, error) in
             
             if error != nil {
@@ -57,5 +42,20 @@ open class NetworkingRequest {
             }
         })
         task.resume()
+    }
+}
+
+class Networking {
+    
+    // MARK: Variables
+    
+    let config: URLSessionConfiguration
+    let session: URLSession
+    let appId: String
+    
+    init(config: URLSessionConfiguration, appId: String) {
+        self.config = config
+        self.session = URLSession(configuration: self.config)
+        self.appId = appId
     }
 }

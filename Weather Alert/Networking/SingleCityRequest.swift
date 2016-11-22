@@ -25,8 +25,6 @@ class SingleCityRequest: NetworkingRequest {
             let object = City(entity: entity!, insertInto: self.dataController.managedObjectContext)
             
             object.mapping(json: result!)
-            
-//            let res = object.dataToDictionary()
             completionHandler(object)
         }
     }
