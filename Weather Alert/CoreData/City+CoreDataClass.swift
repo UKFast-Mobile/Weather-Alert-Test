@@ -9,10 +9,13 @@
 import Foundation
 import CoreData
 
+protocol DataModel {
+    func mapping(json: [String : Any])
+}
 
-public class City: NSManagedObject {
+public class City: NSManagedObject, DataModel {
     
-    func mapping(json: [String : Any]) {
+    internal func mapping(json: [String : Any]) {
         
         id = json["id"] as? NSNumber
         name = json["name"] as? String
