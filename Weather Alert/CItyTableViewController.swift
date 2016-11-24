@@ -13,40 +13,29 @@ class CityTableViewController: UITableViewController {
     
     // MARK: Variables
     
-    var cities: [City] = []
+    var dataController: DataController { return AppShared.instances.dataController }
     
-    // NOTE: Uncomment when merge
-    var dataController = DataController()
-//  var dataController: DataController { return AppShared.instances.dataController }
+    var cities: [City] {
+        
+        let citiesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "City")
+        
+        do {
+            return try dataController.managedObjectContext.fetch(citiesFetch) as! [City]
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
+        }
+    }
+    
     
     // MARK: Functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadSampleCities()
     }
     
-    func loadSampleCities() {
-        
-        let jsonResult = loadJson(jsonFile: "SeveralCities")
-        let list = jsonResult!["list"] as? [[String : Any]]
-        
-        for (_, json) in list!.enumerated() {
-            let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "City", in: dataController.managedObjectContext)
-            let object = City(entity: entity!, insertInto: dataController.managedObjectContext)
-            object.mapping(json: json)
-            cities.append(object)
-        }
-    }
-    
-    func loadJson(jsonFile: String) -> [String : Any]? {
-        
-        guard let path = Bundle.main.url(forResource: jsonFile, withExtension: "json"),
-            let jsonData = try? Data(contentsOf: path, options: Data.ReadingOptions.mappedIfSafe),
-            let jsonResult: [String : Any]? = try? JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments) as? [String : Any]
-            else { return nil }
-        
-        return jsonResult
+    @IBAction func searchEditingChanged(_ sender: UITextField) {
+        dataController.saveCities()
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {

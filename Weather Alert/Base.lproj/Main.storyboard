@@ -32,7 +32,8 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" returnKeyType="go"/>
                                             <connections>
-                                                <action selector="search:" destination="sX7-Hf-hfz" eventType="editingDidEnd" id="Y5f-r4-ftm"/>
+                                                <action selector="searchEditingChanged:" destination="sX7-Hf-hfz" eventType="editingChanged" id="eNc-07-fG2"/>
+                                                <action selector="searchEndEdit:" destination="sX7-Hf-hfz" eventType="editingDidEnd" id="N6M-vA-g3F"/>
                                             </connections>
                                         </textField>
                                     </subviews>
@@ -44,7 +45,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="searchTextFeild" destination="GEw-Sv-ldU" id="zkw-Jw-fSv"/>
+                                    <outlet property="searchTextFeild" destination="GEw-Sv-ldU" id="mQM-AU-6zl"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CityTableViewCell" rowHeight="90" id="IBh-Iu-hfg" customClass="CityTableViewCell" customModule="Weather_Alert" customModuleProvider="target">

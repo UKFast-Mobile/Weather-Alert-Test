@@ -22,7 +22,7 @@ public class City: NSManagedObject, DataModel {
         
         if let sys = json["sys"] as? [String : Any] {
             country = sys["country"] as? String
-
+            
         }
         
         if let coord = json["coord"] as? [String : Any] {
@@ -33,6 +33,31 @@ public class City: NSManagedObject, DataModel {
         if let wind = json["wind"] as? [String : Any] {
             deg = wind["deg"] as? NSNumber
             speed = wind["speed"] as? NSNumber
+        }
+    }
+}
+
+extension DataController {
+    
+    var dataController: DataController { return AppShared.instances.dataController }
+    
+    func saveCities() {
+        do {
+            try dataController.managedObjectContext.save()
+        } catch {
+            fatalError("Failure to save context: \(error)")
+        }
+    }
+    
+    func requestCities() -> [City] {
+        
+        let citiesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "City")
+        
+        do {
+            let fetchedCities = try dataController.managedObjectContext.fetch(citiesFetch) as! [City]
+            return fetchedCities
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
         }
     }
 }

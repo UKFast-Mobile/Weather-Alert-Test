@@ -8,13 +8,12 @@
 
 import XCTest
 import CoreData
+import Foundation
 @testable import Weather_Alert
 
 class DataControllerTests: XCTestCase {
     
-    // NOTE: Uncomment when merge
-    var dataController = DataController()
-    //  var dataController: DataController { return AppShared.instances.dataController }
+      var dataController: DataController { return AppShared.instances.dataController }
     
     override func setUp() {
         super.setUp()
@@ -29,7 +28,7 @@ class DataControllerTests: XCTestCase {
     
     func testDataControllerSetup() {
         
-        let dataController = DataController()
+        var dataController: DataController { return AppShared.instances.dataController }
         
         
         XCTAssertNotNil(dataController.managedObjectContext)
@@ -163,4 +162,77 @@ class DataControllerTests: XCTestCase {
         }
     }
     
+    
+    func testForecastRequest() {
+        let exp = expectation(description: "Forecast request failed")
+        
+        let city = ForecastRequest(cityId: 524901)
+        
+        city.response() { result in
+            XCTAssertEqual(result[0].country, "RU")
+            XCTAssertEqual(result[0].name, "Moscow")
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10.0) { (err) in
+            XCTAssertNil(err)
+        }
+    }
+    
+    
+    
+    func testSingleCityRequest() {
+        let exp = expectation(description: "Single city request failed")
+        
+        let city = SingleCityRequest(cityId: 524901)
+        
+        city.response() { result in
+            XCTAssertEqual(result.country, "RU")
+            XCTAssertEqual(result.name, "Moscow")
+            exp.fulfill()
+        }
+        
+        
+        waitForExpectations(timeout: 60.0) { (err) in
+            XCTAssertNil(err)
+        }
+    }
+    
+    
+    
+    func testSearchCityRequest() {
+        let exp = expectation(description: "Search city request failed")
+        
+        let city = SearchCityRequest(cityName: "London,UK")
+        
+        city.response() { result in
+            XCTAssertEqual(result.country, "UK")
+            XCTAssertEqual(result.name, "London")
+            exp.fulfill()
+        }
+        
+        
+        waitForExpectations(timeout: 60.0) { (err) in
+            XCTAssertNil(err)
+        }
+    }
+    
+    func testFetchCities() {
+        let exp = expectation(description: "Search city request failed")
+        
+        let city = SearchCityRequest(cityName: "London,UK")
+        
+        city.response() { result in
+            XCTAssertEqual(result.country, "UK")
+            XCTAssertEqual(result.name, "London")
+            result.saveCities()
+            print(result.requestCities())
+            exp.fulfill()
+        }
+        
+        
+        waitForExpectations(timeout: 60.0) { (err) in
+            XCTAssertNil(err)
+        }
+    }
 }

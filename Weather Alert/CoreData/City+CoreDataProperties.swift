@@ -45,3 +45,20 @@ extension City {
     @NSManaged public var speed: NSNumber?
     
 }
+
+
+extension City {
+    
+    func dataToDictionary() -> [String : Any] {
+        var full: [String : Any] = [:]
+        full["id"] =  id
+        full["name"] = name
+        full["country"] = country
+        full["lon"] = lon
+        full["lat"] = lat
+        full["deg"] = deg
+        full["speed"] = speed
+        return full
+    }
+
+}
