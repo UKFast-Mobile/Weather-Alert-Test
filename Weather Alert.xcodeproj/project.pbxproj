@@ -15,6 +15,7 @@
 		1AB5F6901DDDE0B800BECD88 /* City+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB5F68D1DDDE0B800BECD88 /* City+CoreDataClass.swift */; };
 		1AB9EB381DE48666006EF5E0 /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EB371DE48666006EF5E0 /* CityTableViewCell.swift */; };
 		1AB9EB3A1DE4996A006EF5E0 /* CItyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EB391DE4996A006EF5E0 /* CItyTableViewController.swift */; };
+		1AE558501DE6F8A200288FAE /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE5584F1DE6F8A200288FAE /* SearchTableViewCell.swift */; };
 		5F6970111DD33B8200618FC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6970101DD33B8200618FC0 /* AppDelegate.swift */; };
 		5F6970131DD33B8200618FC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6970121DD33B8200618FC0 /* ViewController.swift */; };
 		5F6970161DD33B8200618FC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F6970141DD33B8200618FC0 /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		1AB5F68D1DDDE0B800BECD88 /* City+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "City+CoreDataClass.swift"; path = "CoreData/City+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1AB9EB371DE48666006EF5E0 /* CityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
 		1AB9EB391DE4996A006EF5E0 /* CItyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CItyTableViewController.swift; sourceTree = "<group>"; };
+		1AE5584F1DE6F8A200288FAE /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		5F69700D1DD33B8200618FC0 /* Weather Alert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Alert.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F6970101DD33B8200618FC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F6970121DD33B8200618FC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				5F6970141DD33B8200618FC0 /* Main.storyboard */,
 				1AB9EB391DE4996A006EF5E0 /* CItyTableViewController.swift */,
 				1AB9EB371DE48666006EF5E0 /* CityTableViewCell.swift */,
+				1AE5584F1DE6F8A200288FAE /* SearchTableViewCell.swift */,
 				5F6970171DD33B8200618FC0 /* Assets.xcassets */,
 				5F6970191DD33B8200618FC0 /* LaunchScreen.storyboard */,
 				5F69701C1DD33B8200618FC0 /* Info.plist */,
@@ -255,6 +258,7 @@
 				1A4FD8821DDDB7780096C901 /* Forecast+CoreDataClass.swift in Sources */,
 				1A92388B1DDDE27D00A3A045 /* Forecast+CoreDataProperties.swift in Sources */,
 				5FD8CC311DD49D7A000D4860 /* DataController.swift in Sources */,
+				1AE558501DE6F8A200288FAE /* SearchTableViewCell.swift in Sources */,
 				1AB9EB3A1DE4996A006EF5E0 /* CItyTableViewController.swift in Sources */,
 				5F6970131DD33B8200618FC0 /* ViewController.swift in Sources */,
 				1A92388C1DDDE27D00A3A045 /* City+CoreDataProperties.swift in Sources */,
