@@ -19,7 +19,6 @@
 		1ADF2ED11DE459070082D7D0 /* Forecast+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF2ECC1DE459070082D7D0 /* Forecast+CoreDataClass.swift */; };
 		1ADF2ED21DE459070082D7D0 /* Forecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF2ECD1DE459070082D7D0 /* Forecast+CoreDataProperties.swift */; };
 		1ADF2ED41DE459D40082D7D0 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF2ED31DE459D40082D7D0 /* TestHelper.swift */; };
-		1AE558501DE6F8A200288FAE /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE5584F1DE6F8A200288FAE /* SearchTableViewCell.swift */; };
 		1AEAB60B1DE708E9008A5ECC /* SearchCityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEAB60A1DE708E9008A5ECC /* SearchCityRequest.swift */; };
 		5F6970111DD33B8200618FC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6970101DD33B8200618FC0 /* AppDelegate.swift */; };
 		5F6970161DD33B8200618FC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F6970141DD33B8200618FC0 /* Main.storyboard */; };
@@ -56,7 +55,6 @@
 		1ADF2ECC1DE459070082D7D0 /* Forecast+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Forecast+CoreDataClass.swift"; path = "CoreData/Forecast+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1ADF2ECD1DE459070082D7D0 /* Forecast+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Forecast+CoreDataProperties.swift"; path = "CoreData/Forecast+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1ADF2ED31DE459D40082D7D0 /* TestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
-		1AE5584F1DE6F8A200288FAE /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		1AEAB60A1DE708E9008A5ECC /* SearchCityRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchCityRequest.swift; path = Networking/SearchCityRequest.swift; sourceTree = "<group>"; };
 		5F69700D1DD33B8200618FC0 /* Weather Alert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Alert.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F6970101DD33B8200618FC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 				5F6970141DD33B8200618FC0 /* Main.storyboard */,
 				1AB9EB391DE4996A006EF5E0 /* CItyTableViewController.swift */,
 				1AB9EB371DE48666006EF5E0 /* CityTableViewCell.swift */,
-				1AE5584F1DE6F8A200288FAE /* SearchTableViewCell.swift */,
 				5F6970171DD33B8200618FC0 /* Assets.xcassets */,
 				5F6970191DD33B8200618FC0 /* LaunchScreen.storyboard */,
 				5F69701C1DD33B8200618FC0 /* Info.plist */,
@@ -290,7 +287,6 @@
 				1ADF2ED21DE459070082D7D0 /* Forecast+CoreDataProperties.swift in Sources */,
 				1AB9EB381DE48666006EF5E0 /* CityTableViewCell.swift in Sources */,
 				5FD8CC311DD49D7A000D4860 /* DataController.swift in Sources */,
-				1AE558501DE6F8A200288FAE /* SearchTableViewCell.swift in Sources */,
 				1AB9EB3A1DE4996A006EF5E0 /* CItyTableViewController.swift in Sources */,
 				1AEAB60B1DE708E9008A5ECC /* SearchCityRequest.swift in Sources */,
 				5F6970111DD33B8200618FC0 /* AppDelegate.swift in Sources */,

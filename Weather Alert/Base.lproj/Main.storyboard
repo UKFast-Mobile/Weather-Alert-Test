@@ -19,37 +19,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTableViewCell" rowHeight="90" id="sX7-Hf-hfz" customClass="SearchTableViewCell" customModule="Weather_Alert" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="90"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sX7-Hf-hfz" id="svS-w0-oa7">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="89"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GEw-Sv-ldU">
-                                            <rect key="frame" x="8" y="32" width="398" height="49.666666666666671"/>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" returnKeyType="go"/>
-                                            <connections>
-                                                <action selector="searchEditingChanged:" destination="sX7-Hf-hfz" eventType="editingChanged" id="eNc-07-fG2"/>
-                                                <action selector="searchEndEdit:" destination="sX7-Hf-hfz" eventType="editingDidEnd" id="N6M-vA-g3F"/>
-                                            </connections>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="GEw-Sv-ldU" firstAttribute="top" secondItem="svS-w0-oa7" secondAttribute="top" constant="32" id="9Hd-ob-G8h"/>
-                                        <constraint firstItem="GEw-Sv-ldU" firstAttribute="leading" secondItem="svS-w0-oa7" secondAttribute="leading" constant="8" id="JXZ-bK-Z0m"/>
-                                        <constraint firstAttribute="bottom" secondItem="GEw-Sv-ldU" secondAttribute="bottom" constant="8" id="j0h-Ri-H8p"/>
-                                        <constraint firstAttribute="trailing" secondItem="GEw-Sv-ldU" secondAttribute="trailing" constant="8" id="ugZ-8a-pRQ"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="searchTextFeild" destination="GEw-Sv-ldU" id="mQM-AU-6zl"/>
-                                </connections>
-                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CityTableViewCell" rowHeight="90" id="IBh-Iu-hfg" customClass="CityTableViewCell" customModule="Weather_Alert" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="118" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IBh-Iu-hfg" id="uEb-x0-SWD">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="89"/>
@@ -127,8 +98,19 @@
                             <outlet property="delegate" destination="5Kq-Zf-fpc" id="xVd-FE-EPc"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="5hv-fv-fui" id="8Bf-G5-beb"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SNE-Qz-81K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="5hv-fv-fui">
+                    <connections>
+                        <outlet property="delegate" destination="5Kq-Zf-fpc" id="uJS-uk-iy0"/>
+                        <outlet property="searchContentsController" destination="5Kq-Zf-fpc" id="ZQe-Nl-Gft"/>
+                        <outlet property="searchResultsDataSource" destination="5Kq-Zf-fpc" id="8rD-Eu-sWi"/>
+                        <outlet property="searchResultsDelegate" destination="5Kq-Zf-fpc" id="Wyz-Kp-YEu"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="-4239" y="-418"/>
         </scene>
