@@ -13,6 +13,7 @@
 		1A4E59921DDF1C930001BF6F /* ForecastRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4E59911DDF1C930001BF6F /* ForecastRequest.swift */; };
 		1A65278E1DE3643B00C92F37 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A65278D1DE3643B00C92F37 /* Global.swift */; };
 		1AB7627D1DE3133F00DB8FBF /* SingleCityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7627C1DE3133F00DB8FBF /* SingleCityRequest.swift */; };
+		1ABFC58A1DE760E000FA66D3 /* NetworkingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABFC5891DE760E000FA66D3 /* NetworkingRequest.swift */; };
 		1ADF2ED01DE459070082D7D0 /* Forecast.json in Resources */ = {isa = PBXBuildFile; fileRef = 1ADF2ECB1DE459070082D7D0 /* Forecast.json */; };
 		1ADF2ED11DE459070082D7D0 /* Forecast+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF2ECC1DE459070082D7D0 /* Forecast+CoreDataClass.swift */; };
 		1ADF2ED21DE459070082D7D0 /* Forecast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADF2ECD1DE459070082D7D0 /* Forecast+CoreDataProperties.swift */; };
@@ -47,6 +48,7 @@
 		1A4E59911DDF1C930001BF6F /* ForecastRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForecastRequest.swift; path = Networking/ForecastRequest.swift; sourceTree = "<group>"; };
 		1A65278D1DE3643B00C92F37 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Global.swift; path = "Supporting Files/Global.swift"; sourceTree = "<group>"; };
 		1AB7627C1DE3133F00DB8FBF /* SingleCityRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleCityRequest.swift; path = Networking/SingleCityRequest.swift; sourceTree = "<group>"; };
+		1ABFC5891DE760E000FA66D3 /* NetworkingRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkingRequest.swift; path = Networking/NetworkingRequest.swift; sourceTree = "<group>"; };
 		1ADF2ECB1DE459070082D7D0 /* Forecast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Forecast.json; path = CoreData/Forecast.json; sourceTree = "<group>"; };
 		1ADF2ECC1DE459070082D7D0 /* Forecast+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Forecast+CoreDataClass.swift"; path = "CoreData/Forecast+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1ADF2ECD1DE459070082D7D0 /* Forecast+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Forecast+CoreDataProperties.swift"; path = "CoreData/Forecast+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				1A4E598F1DDF113D0001BF6F /* Networking.swift */,
+				1ABFC5891DE760E000FA66D3 /* NetworkingRequest.swift */,
 				1A4E59911DDF1C930001BF6F /* ForecastRequest.swift */,
 				1AB7627C1DE3133F00DB8FBF /* SingleCityRequest.swift */,
 			);
@@ -275,6 +278,7 @@
 			files = (
 				1A4E59901DDF113D0001BF6F /* Networking.swift in Sources */,
 				1AB7627D1DE3133F00DB8FBF /* SingleCityRequest.swift in Sources */,
+				1ABFC58A1DE760E000FA66D3 /* NetworkingRequest.swift in Sources */,
 				1A4E59921DDF1C930001BF6F /* ForecastRequest.swift in Sources */,
 				1ADF2ED11DE459070082D7D0 /* Forecast+CoreDataClass.swift in Sources */,
 				1A45AA741DE45EED00F30518 /* City+CoreDataProperties.swift in Sources */,
