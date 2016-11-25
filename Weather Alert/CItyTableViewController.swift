@@ -46,39 +46,39 @@ class CityTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let test = sender as? CityTableViewCell {
+            print(test)
+            if let name = test.nameLabel.text, let country = test.countryLabel.text {
+                print(name)
+                print(country)
+            }
+        }
+        
+    }
+    
     // MARK: Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (activeSearch ? filterCities : cities ).count
+        return (searchIsActive ? filterCities : cities ).count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = "CityTableViewCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CityTableViewCell
-        let city = (activeSearch ? filterCities : cities )[indexPath.row]
+        let city = (searchIsActive ? filterCities : cities )[indexPath.row]
         
-        
-        cell.directionLabel.text = city.direction
+        cell.city = city
         cell.nameLabel.text = city.name
         cell.countryLabel.text = city.country
-        
-        if let degree = city.deg?.stringValue {
-            cell.degLabel.text = degree + "°"
-        } else {
-            cell.degLabel.text = "Unknown"
-        }
-        
-        if let spd = city.speed?.stringValue {
-            cell.speedLabel.text = spd + " mph"
-        } else {
-            cell.speedLabel.text = "Unknown"
-        }
         
         return cell
     }
@@ -86,7 +86,7 @@ class CityTableViewController: UITableViewController {
 
 extension CityTableViewController: UISearchResultsUpdating {
     
-    var activeSearch: Bool {
+    var searchIsActive: Bool {
         if searchController.isActive && searchController.searchBar.text != "" {
             return true
         } else {
@@ -94,7 +94,8 @@ extension CityTableViewController: UISearchResultsUpdating {
         }
     }
     
-    func filterContentForSearchText(searchText: String?, scope: String = "All") {
+    func searchUsingData(searchText: String?, scope: String = "All") {
+        
         filterCities = cities.filter { city in
             if let cityName = city.name, let lowerSearch = searchText?.lowercased() {
                 return cityName.lowercased().contains(lowerSearch)
@@ -107,8 +108,42 @@ extension CityTableViewController: UISearchResultsUpdating {
         tableView.reloadData()
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchText: searchController.searchBar.text)
+    func searchUsingAPI(searchText: String?) {
+        if let cityName = searchText, filterCities.count < 1, searchIsActive  {
+            
+            let city = SearchCityRequest(cityName: cityName)
+            
+            city.response() { result in
+                
+                if let resName = result.name {
+                    
+                    
+                    self.searchUsingData(searchText: resName)
+                    
+                    
+                    DispatchQueue.main.async(execute: {
+                        
+                        if self.filterCities.count == 1 {
+                            self.dataController.saveCities()
+                            self.filterCities = [result];
+                            self.tableView.reloadData()
+                        }
+                            
+                        else {
+                            self.dataController.discardCities()
+                            self.searchUsingData(searchText: resName)
+                            self.tableView.reloadData()
+                        }
+                    });
+                }
+                
+            }
+        }
+        
     }
     
+    func updateSearchResults(for searchController: UISearchController) {
+        searchUsingData(searchText: searchController.searchBar.text)
+        searchUsingAPI(searchText: searchController.searchBar.text)
+    }
 }

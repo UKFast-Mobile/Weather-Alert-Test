@@ -13,11 +13,10 @@ class CityTableViewCell: UITableViewCell {
     
     // MARK: Variables
     
-    @IBOutlet weak var directionLabel: UILabel!
-    @IBOutlet weak var degLabel: UILabel!
-    @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
+    
+    var city: City?
 
     // MARK: Functions
     

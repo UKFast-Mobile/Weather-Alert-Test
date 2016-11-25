@@ -49,6 +49,10 @@ extension DataController {
         }
     }
     
+    func discardCities() {
+        dataController.managedObjectContext.rollback()
+    }
+    
     func requestCities() -> [City] {
         
         let citiesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "City")

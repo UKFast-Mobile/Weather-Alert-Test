@@ -206,7 +206,7 @@ class DataControllerTests: XCTestCase {
         let city = SearchCityRequest(cityName: "London,UK")
         
         city.response() { result in
-            XCTAssertEqual(result.country, "UK")
+            XCTAssertEqual(result.country, "GB")
             XCTAssertEqual(result.name, "London")
             exp.fulfill()
         }
@@ -223,10 +223,10 @@ class DataControllerTests: XCTestCase {
         let city = SearchCityRequest(cityName: "London,UK")
         
         city.response() { result in
-            XCTAssertEqual(result.country, "UK")
+            XCTAssertEqual(result.country, "GB")
             XCTAssertEqual(result.name, "London")
-            result.saveCities()
-            print(result.requestCities())
+            self.dataController.saveCities()
+            print(self.dataController.requestCities())
             exp.fulfill()
         }
         
