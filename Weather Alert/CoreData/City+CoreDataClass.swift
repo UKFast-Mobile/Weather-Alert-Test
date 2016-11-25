@@ -22,7 +22,7 @@ public class City: NSManagedObject, DataModel {
         
         if let sys = json["sys"] as? [String : Any] {
             country = sys["country"] as? String
-
+            
         }
         
         if let coord = json["coord"] as? [String : Any] {
@@ -35,4 +35,5 @@ public class City: NSManagedObject, DataModel {
             speed = wind["speed"] as? NSNumber
         }
     }
+    
 }

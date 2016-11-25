@@ -8,11 +8,14 @@
 
 import XCTest
 import CoreData
+import Foundation
 @testable import Weather_Alert
 
 class DataControllerTests: XCTestCase {
     
     let dataController = DataController()
+    
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -160,4 +163,39 @@ class DataControllerTests: XCTestCase {
         }
     }
     
+    
+    func testForecastRequest() {
+        let exp = expectation(description: "Forecast request failed")
+        
+        let city = ForecastRequest(cityId: 524901)
+        
+        city.response() { result in
+            XCTAssertEqual(result[0].country, "RU")
+            XCTAssertEqual(result[0].name, "Moscow")
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10.0) { (err) in
+            XCTAssertNil(err)
+        }
+    }
+    
+    
+    
+    func testSingleCityRequest() {
+        let exp = expectation(description: "Single city request failed")
+        
+        let city = SingleCityRequest(cityId: 524901)
+        
+        city.response() { result in
+            XCTAssertEqual(result.country, "RU")
+            XCTAssertEqual(result.name, "Moscow")
+            exp.fulfill()
+        }
+        
+        
+        waitForExpectations(timeout: 60.0) { (err) in
+            XCTAssertNil(err)
+        }
+    }
 }
