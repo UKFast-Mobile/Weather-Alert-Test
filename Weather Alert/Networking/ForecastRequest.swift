@@ -12,31 +12,26 @@ import CoreData
 class ForecastRequest: NetworkingRequest {
     
     init(cityId: Int) {
-        super.init()
-        path = "/forecast/daily?id=\(cityId)"
+        let path = "/forecast/daily?id=\(cityId)"
+        super.init(path: path)
     }
     
     func response(completionHandler: @escaping ([Forecast]) -> Void) {
         
         var objects: [Forecast] = []
-        
-        super.handleResponse() { result in
+        handleResponse() { res in
             
-            
-            let list = result!["list"] as? [[String : Any]]
-            
-            for (idx, _) in list!.enumerated() {
-                
-                let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "Forecast", in: self.dataController.managedObjectContext)
-                
-                let object = Forecast(entity: entity!, insertInto: self.dataController.managedObjectContext)
-                
-                object.mapping(json: result!, count: idx)
-                objects.append(object)
+            if let result = res, let list = result["list"] as? [[String : Any]] {
+                for (idx, _) in list.enumerated() {
+                    
+                    let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "Forecast", in: self.dataController.managedObjectContext)
+                    let object = Forecast(entity: entity!, insertInto: self.dataController.managedObjectContext)
+                    
+                    object.mapping(json: result, count: idx)
+                    objects.append(object)
+                }
             }
-            
             completionHandler(objects)
         }
     }
-    
 }
