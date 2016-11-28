@@ -15,15 +15,14 @@ class CityTableViewController: UITableViewController {
         
     var dataController: DataController { return AppShared.instances.dataController }
     var cities: [City] {
-        let citiesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "City")
-        do { return try dataController.managedObjectContext.fetch(citiesFetch) as! [City] }
+        let citiesFetch = NSFetchRequest<City>(entityName: "City")
+        do { return try dataController.managedObjectContext.fetch(citiesFetch) }
         catch { fatalError("Failed to fetch employees: \(error)") }
     }
     
     // MARK: UISearchController
     
     let searchController = UISearchController(searchResultsController: nil)
-    
     var filterCities: [City] = []
     
     
@@ -39,7 +38,7 @@ class CityTableViewController: UITableViewController {
     }
     
     @IBAction func searchEditingChanged(_ sender: UITextField) {
-        dataController.saveCities()
+        dataController.store()
         self.tableView.reloadData()
     }
 
@@ -47,14 +46,13 @@ class CityTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let test = sender as? CityTableViewCell {
-            print(test)
-            if let name = test.nameLabel.text, let country = test.countryLabel.text {
-                print(name)
-                print(country)
+            if let destinationVC = segue.destination as? CityDetailsViewController {
+                destinationVC.city = test.city
             }
         }
         
@@ -79,6 +77,8 @@ class CityTableViewController: UITableViewController {
         cell.city = city
         cell.nameLabel.text = city.name
         cell.countryLabel.text = city.country
+        cell.directionImage.image = UIImage(named: "\(city.direction.lowercased())Image")
+
         
         return cell
     }
@@ -114,32 +114,32 @@ extension CityTableViewController: UISearchResultsUpdating {
             let city = SearchCityRequest(cityName: cityName)
             
             city.response() { result in
-                
-                if let resName = result.name {
+                if let res = result {
                     
-                    
-                    self.searchUsingData(searchText: resName)
-                    
-                    
-                    DispatchQueue.main.async(execute: {
+                    if let resName = res.name {
                         
-                        if self.filterCities.count == 1 {
-                            self.dataController.saveCities()
-                            self.filterCities = [result];
-                            self.tableView.reloadData()
-                        }
+                        self.searchUsingData(searchText: resName)
+                        
+                        DispatchQueue.main.async(execute: {
                             
-                        else {
-                            self.dataController.discardCities()
-                            self.searchUsingData(searchText: resName)
-                            self.tableView.reloadData()
-                        }
-                    });
+                            // If filtered down to one result, save the new city and show the result
+                            if self.filterCities.count == 1 {
+                                self.dataController.store()
+                                self.filterCities = [res];
+                                self.tableView.reloadData()
+                            }
+                                
+                                // If more or less than one result, discard the last API call and show the old results
+                            else {
+                                self.dataController.discard()
+                                self.searchUsingData(searchText: resName)
+                                self.tableView.reloadData()
+                            }
+                        });
+                    }
                 }
-                
             }
         }
-        
     }
     
     func updateSearchResults(for searchController: UISearchController) {

@@ -20,7 +20,7 @@ open class NetworkingRequest {
     var dataController: DataController { return AppShared.instances.dataController }
         
     init(path : String) {
-        self.path = path;
+        self.path = path.sanitizeStringURL();
     }
     
     // MARK: Functions
@@ -46,3 +46,11 @@ open class NetworkingRequest {
     }
     
 }
+
+extension String {
+    func sanitizeStringURL() -> String {
+        return self.replacingOccurrences(of: " ", with: "%20")
+    }
+}
+
+//%20

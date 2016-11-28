@@ -80,6 +80,33 @@ class DataController {
         }
         return true
     }
+}
+
+extension DataController {
     
+    var dataController: DataController { return AppShared.instances.dataController }
     
+    func store() {
+        do {
+            try dataController.managedObjectContext.save()
+        } catch {
+            fatalError("Failure to save context: \(error)")
+        }
+    }
+    
+    func discard() {
+        dataController.managedObjectContext.rollback()
+    }
+    
+    func requestCities() -> [City] {
+        
+        let citiesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "City")
+        
+        do {
+            let fetchedCities = try dataController.managedObjectContext.fetch(citiesFetch) as! [City]
+            return fetchedCities
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
+        }
+    }
 }

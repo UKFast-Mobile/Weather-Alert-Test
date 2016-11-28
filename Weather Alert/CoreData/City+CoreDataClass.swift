@@ -13,7 +13,17 @@ protocol DataModel {
     func mapping(json: [String : Any])
 }
 
-public class City: NSManagedObject, DataModel {
+class City: NSManagedObject, DataModel {
+
+    convenience init(entity: NSEntityDescription, insertInto: NSManagedObjectContext?, json: [String : Any]) {
+        self.init(entity: entity, insertInto: insertInto)
+        
+        guard let _ = json["id"] as? NSNumber,
+            let _ = json["name"] as? String
+            else { return }
+
+        mapping(json: json)
+    }
     
     internal func mapping(json: [String : Any]) {
         
@@ -33,35 +43,6 @@ public class City: NSManagedObject, DataModel {
         if let wind = json["wind"] as? [String : Any] {
             deg = wind["deg"] as? NSNumber
             speed = wind["speed"] as? NSNumber
-        }
-    }
-}
-
-extension DataController {
-    
-    var dataController: DataController { return AppShared.instances.dataController }
-    
-    func saveCities() {
-        do {
-            try dataController.managedObjectContext.save()
-        } catch {
-            fatalError("Failure to save context: \(error)")
-        }
-    }
-    
-    func discardCities() {
-        dataController.managedObjectContext.rollback()
-    }
-    
-    func requestCities() -> [City] {
-        
-        let citiesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "City")
-        
-        do {
-            let fetchedCities = try dataController.managedObjectContext.fetch(citiesFetch) as! [City]
-            return fetchedCities
-        } catch {
-            fatalError("Failed to fetch employees: \(error)")
         }
     }
 }

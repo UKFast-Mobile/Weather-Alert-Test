@@ -16,14 +16,16 @@ class SearchCityRequest: NetworkingRequest {
         super.init(path: path)
     }
     
-    func response(completionHandler: @escaping (City) -> Void) {
+    func response(completionHandler: @escaping (City?) -> Void) {
         handleResponse() { result in
-            
-            let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "City", in: self.dataController.managedObjectContext)
-            let object = City(entity: entity!, insertInto: self.dataController.managedObjectContext)
-            
-            if let res = result { object.mapping(json: res) }
-            completionHandler(object)
+            if let res = result, let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: "City", in: self.dataController.managedObjectContext) {
+                
+                let object = City(entity: entity, insertInto: self.dataController.managedObjectContext, json: res)
+                completionHandler(object)
+            }
+            else {
+                completionHandler(nil)
+            }
         }
     }
     
