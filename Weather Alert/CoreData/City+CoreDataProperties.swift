@@ -6,8 +6,8 @@
 //  Copyright © 2016 UKFast. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import UIKit
 
 
 extension City {
@@ -29,23 +29,43 @@ extension City {
 extension City {
     
     
-    public var direction: String {
+    var direction: String {
+
+        var direction: String = "Unknown"
         
         if let direct: Int = deg as? Int {
             
             if direct > 315 || direct <= 45 {
-                return "North"
+                direction = "North"
             } else if direct > 45 && direct <= 135 {
-                return "East"
+                direction = "East"
             } else if direct > 135 && direct <= 225 {
-                return "South"
+                direction = "South"
             } else if direct > 225 && direct <= 315 {
-                return "West"
-            } else {
-                return "Unknown"
+                direction = "West"
             }
-        } else {
-            return "Unknown"
         }
+        return direction
     }
+    
+    var windSpeed: String {
+        if let s = speed {
+            return String(describing: s)+" mph"
+        }
+        return ""
+    }
+    
+    var windDirectionImage: UIImage? {
+        return UIImage(named: "\(direction.lowercased())Image")
+    }
+    
+    var directionLabel: String {
+        return "Direction: \(direction)"
+    }
+    
+    var windSpeedLabel: String {
+        return "Speed: \(windSpeed)"
+    }
+    
+    
 }

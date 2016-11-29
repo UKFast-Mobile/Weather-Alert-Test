@@ -77,7 +77,7 @@ class CityTableViewController: UITableViewController {
         cell.city = city
         cell.nameLabel.text = city.name
         cell.countryLabel.text = city.country
-        cell.directionImage.image = UIImage(named: "\(city.direction.lowercased())Image")
+        cell.directionImage.image = city.windDirectionImage
 
         
         return cell

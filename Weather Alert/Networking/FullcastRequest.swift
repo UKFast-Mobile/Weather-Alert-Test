@@ -16,8 +16,7 @@ class FullcastRequest: NetworkingRequest {
     init(cityId: Int) {
         let path = "/forecast/daily?id=\(cityId)"
         super.init(path: path)
-        
-        fetchData() { fetched in
+        self.fetchData() { fetched in
             if let res = fetched {
                 self.result = res
             }

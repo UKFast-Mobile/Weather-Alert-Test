@@ -29,17 +29,18 @@ open class NetworkingRequest {
         let fullPath = URL(string: "http://api.openweathermap.org/data/2.5\(path)&appid=\(networking.appId)")
         let task = networking.session.dataTask(with: fullPath!, completionHandler: {
             (data, response, error) in
-                
-            if error != nil {
-                completionHandler(nil)
-            }
-            
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] {
-                    completionHandler(json)
+            DispatchQueue.main.async {
+                if error != nil {
+                    completionHandler(nil)
                 }
-            } catch {
-                completionHandler(nil)
+                
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] {
+                        completionHandler(json)
+                    }
+                } catch {
+                    completionHandler(nil)
+                }
             }
         })
         task.resume()
