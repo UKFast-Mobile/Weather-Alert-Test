@@ -27,6 +27,9 @@ class City: NSManagedObject, DataModel {
     
     internal func mapping(json: [String : Any]) {
         
+        if let _ = favourite {}
+        else { favourite = false }
+        
         id = json["id"] as? NSNumber
         name = json["name"] as? String
         

@@ -57,7 +57,6 @@ extension ForcastTableModel: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(indexPath.section)
         switch indexPath.section {
         case 0:
             

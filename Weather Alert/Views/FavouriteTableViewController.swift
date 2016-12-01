@@ -1,23 +1,38 @@
 //
-//  CItyTableViewController.swift
+//  FavourieTableViewController.swift
 //  Weather Alert
 //
-//  Created by Jack Hopkins on 22/11/2016.
+//  Created by Jack Hopkins on 01/12/2016.
 //  Copyright © 2016 UKFast. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class CityTableViewController: UITableViewController {
+class FavouriteTableViewController: UITableViewController {
     
     // MARK: Variables
-        
+    
     var dataController: DataController { return AppShared.instances.dataController }
     var cities: [City] {
+        var cities: [City] = []
+        var favourites: [City] = []
         let citiesFetch = NSFetchRequest<City>(entityName: "City")
-        do { return try dataController.managedObjectContext.fetch(citiesFetch) }
-        catch { fatalError("Failed to fetch employees: \(error)") }
+        do {
+            cities = try dataController.managedObjectContext.fetch(citiesFetch)
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
+        }
+        
+        for (_, city) in cities.enumerated() {
+            
+            if let fav = city.favourite {
+                if fav as Bool {
+                    favourites.append(city)
+                }
+            }
+        }
+        return favourites
     }
     
     // MARK: UISearchController
@@ -27,7 +42,7 @@ class CityTableViewController: UITableViewController {
     
     
     // MARK: Functions
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,16 +58,15 @@ class CityTableViewController: UITableViewController {
     }
     
     @IBAction func searchEditingChanged(_ sender: UITextField) {
-        dataController.store()
         self.tableView.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 }
 
-    extension CityTableViewController {
+extension FavouriteTableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -64,14 +78,14 @@ class CityTableViewController: UITableViewController {
     }
 }
 
-extension CityTableViewController {
+extension FavouriteTableViewController {
     
     // MARK: Table View
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (searchIsActive ? filterCities : cities ).count
     }
@@ -86,13 +100,13 @@ extension CityTableViewController {
         cell.nameLabel.text = city.name
         cell.countryLabel.text = city.country
         cell.directionImage.image = city.windDirectionImage
-
+        
         
         return cell
     }
 }
 
-extension CityTableViewController: UISearchResultsUpdating {
+extension FavouriteTableViewController: UISearchResultsUpdating {
     
     var searchIsActive: Bool {
         if searchController.isActive && searchController.searchBar.text != "" {
@@ -105,7 +119,6 @@ extension CityTableViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         searchUsingData(searchText: searchController.searchBar.text)
-        searchUsingAPI(searchText: searchController.searchBar.text)
     }
     
     func searchUsingData(searchText: String?, scope: String = "All") {
@@ -121,38 +134,5 @@ extension CityTableViewController: UISearchResultsUpdating {
         
         tableView.reloadData()
     }
-    
-    func searchUsingAPI(searchText: String?) {
-        if let cityName = searchText, filterCities.count < 1, searchIsActive  {
-            
-            let city = SearchCityRequest(cityName: cityName)
-            
-            city.response() { result in
-                if let res = result {
-                    
-                    if let resName = res.name {
-                        
-                        self.searchUsingData(searchText: resName)
-                        
-                        DispatchQueue.main.async(execute: {
-                            
-                            // If filtered down to one result, save the new city and show the result
-                            if self.filterCities.count == 1 {
-                                self.dataController.store()
-                                self.filterCities = [res];
-                                self.tableView.reloadData()
-                            }
-                                
-                                // If more or less than one result, discard the last API call and show the old results
-                            else {
-                                self.dataController.discard()
-                                self.searchUsingData(searchText: resName)
-                                self.tableView.reloadData()
-                            }
-                        });
-                    }
-                }
-            }
-        }
-    }
 }
+

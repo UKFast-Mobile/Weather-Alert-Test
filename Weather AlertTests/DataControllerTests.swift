@@ -142,8 +142,7 @@ class DataControllerTests: XCTestCase {
             XCTAssertTrue(list!.count == count!, "List elements count doesnt match count variable")
             
             if let json = jsonResult {
-                let object = Fullcast(json: json)
-                print(object)
+                _ = Fullcast(json: json)
                 exp.fulfill()
             }
             

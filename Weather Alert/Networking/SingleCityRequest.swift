@@ -11,7 +11,17 @@ import CoreData
 
 class SingleCityRequest: NetworkingRequest {
     
+    var city: City?
+    
+    
     init(cityId: Int) {
+        let path = "/weather?id=\(cityId)"
+        super.init(path: path)
+    }
+    
+    init(oldCity: City) {
+        city = oldCity
+        let cityId = oldCity.id!
         let path = "/weather?id=\(cityId)"
         super.init(path: path)
     }
@@ -20,8 +30,13 @@ class SingleCityRequest: NetworkingRequest {
         super.handleResponse() { result in
             if let res = result, let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: "City", in: self.dataController.managedObjectContext) {
                 
-                let object = City(entity: entity, insertInto: self.dataController.managedObjectContext, json: res)
-                completionHandler(object)
+                if let object = self.city {
+                    object.mapping(json: res)
+                }
+                else {
+                    self.city = City(entity: entity, insertInto: self.dataController.managedObjectContext, json: res)
+                }
+                completionHandler(self.city)
             }
             else {
                 completionHandler(nil)
