@@ -13,7 +13,17 @@ protocol DataModel {
     func mapping(json: [String : Any])
 }
 
-public class City: NSManagedObject, DataModel {
+class City: NSManagedObject, DataModel {
+
+    convenience init(entity: NSEntityDescription, insertInto: NSManagedObjectContext?, json: [String : Any]) {
+        self.init(entity: entity, insertInto: insertInto)
+        
+        guard let _ = json["id"] as? NSNumber,
+            let _ = json["name"] as? String
+            else { return }
+
+        mapping(json: json)
+    }
     
     internal func mapping(json: [String : Any]) {
         
@@ -22,7 +32,7 @@ public class City: NSManagedObject, DataModel {
         
         if let sys = json["sys"] as? [String : Any] {
             country = sys["country"] as? String
-
+            
         }
         
         if let coord = json["coord"] as? [String : Any] {
