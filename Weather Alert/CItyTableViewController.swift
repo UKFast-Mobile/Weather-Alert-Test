@@ -9,22 +9,11 @@
 import UIKit
 import CoreData
 
-class CityTableViewController: UITableViewController {
+class CityTableViewController: TableSearchViewController {
     
     // MARK: Variables
-        
-    var dataController: DataController { return AppShared.instances.dataController }
-    var cities: [City] {
-        let citiesFetch = NSFetchRequest<City>(entityName: "City")
-        do { return try dataController.managedObjectContext.fetch(citiesFetch) }
-        catch { fatalError("Failed to fetch employees: \(error)") }
-    }
     
-    // MARK: UISearchController
-    
-    let searchController = UISearchController(searchResultsController: nil)
-    var filterCities: [City] = []
-    
+    var searchCities: [City] = []
     
     // MARK: Functions
 
@@ -35,11 +24,7 @@ class CityTableViewController: UITableViewController {
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidLoad()
-        tableView.reloadData()
+        
     }
     
     @IBAction func searchEditingChanged(_ sender: UITextField) {
@@ -52,18 +37,6 @@ class CityTableViewController: UITableViewController {
     }
 }
 
-    extension CityTableViewController {
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let test = sender as? CityTableViewCell {
-            if let destinationVC = segue.destination as? CityDetailsViewController {
-                destinationVC.city = test.city
-            }
-        }
-    }
-}
-
 extension CityTableViewController {
     
     // MARK: Table View
@@ -73,85 +46,75 @@ extension CityTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (searchIsActive ? filterCities : cities ).count
+        return (searchIsActive ? filterCities.count : cities.count )
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = "CityTableViewCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CityTableViewCell
-        let city = (searchIsActive ? filterCities : cities )[indexPath.row]
         
-        cell.city = city
+        if searchIsActive {
+            return cellUsingCity(cell: cell, city: searchCities[indexPath.row])
+        }
+        else {
+            return cellUsingCity(cell: cell, city: cities[indexPath.row])
+        }
+    }
+    
+    func cellUsingCity(cell: CityTableViewCell, city: City) -> CityTableViewCell {
+        
         cell.nameLabel.text = city.name
         cell.countryLabel.text = city.country
         cell.directionImage.image = city.windDirectionImage
-
         
         return cell
+        
+    }
+    
+    func cellUsingCity(cell: CityTableViewCell, city: CoreCity) -> CityTableViewCell {
+        
+        cell.nameLabel.text = city.name
+        cell.countryLabel.text = city.country
+        cell.directionImage.image = city.windDirectionImage
+        
+        return cell
+        
     }
 }
 
-extension CityTableViewController: UISearchResultsUpdating {
+extension CityTableViewController {
     
-    var searchIsActive: Bool {
-        if searchController.isActive && searchController.searchBar.text != "" {
-            return true
-        } else {
-            return false
+    override func updateSearchResults(for searchController: UISearchController) {
+
+        super.updateSearchResults(for: searchController)
+        if filterCities.count < 1 {
+            searchUsingAPI(searchText: searchController.searchBar.text)
         }
-    }
-    
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        searchUsingData(searchText: searchController.searchBar.text)
-        searchUsingAPI(searchText: searchController.searchBar.text)
-    }
-    
-    func searchUsingData(searchText: String?, scope: String = "All") {
-        
-        filterCities = cities.filter { city in
-            if let cityName = city.name, let lowerSearch = searchText?.lowercased() {
-                return cityName.lowercased().contains(lowerSearch)
-            }
-            else {
-                return false
-            }
-        }
-        
-        tableView.reloadData()
     }
     
     func searchUsingAPI(searchText: String?) {
-        if let cityName = searchText, filterCities.count < 1, searchIsActive  {
+        if let cityName = searchText {
             
-            let city = SearchCityRequest(cityName: cityName)
-            
-            city.response() { result in
-                if let res = result {
-                    
-                    if let resName = res.name {
-                        
-                        self.searchUsingData(searchText: resName)
-                        
-                        DispatchQueue.main.async(execute: {
-                            
-                            // If filtered down to one result, save the new city and show the result
-                            if self.filterCities.count == 1 {
-                                self.dataController.store()
-                                self.filterCities = [res];
-                                self.tableView.reloadData()
-                            }
-                                
-                                // If more or less than one result, discard the last API call and show the old results
-                            else {
-                                self.dataController.discard()
-                                self.searchUsingData(searchText: resName)
-                                self.tableView.reloadData()
-                            }
-                        });
-                    }
+            let request = SearchCityRequest(cityName: cityName)
+            networking.sendRequest(request) { json, err in
+                if let response = json {
+                    let city = City(json: response)
+                    self.searchCities = [city]
+                    self.tableView.reloadData()
                 }
+            }
+        }
+    }
+}
+
+extension CityTableViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let cell = sender as? CityTableViewCell {
+            if let destinationVC = segue.destination as? CityDetailsViewController {
+                destinationVC.cityName = cell.nameLabel.text
             }
         }
     }

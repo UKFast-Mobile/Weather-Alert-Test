@@ -10,27 +10,33 @@ import UIKit
 
 class ForcastTableModel: NSObject {
     
-    let city: City
-    weak var tableView: UITableView?
-    var forecast: Fullcast?
+    let networking = AppShared.instances.networking
     
-    init(_ aCity: City, table: UITableView) {
+    let city: CoreCity
+    weak var tableView: UITableView?
+    var forecast: Forecast?
+    
+    init(_ aCity: CoreCity, table: UITableView?) {
         city = aCity
         tableView = table
         super.init()
+        tableView?.dataSource = self
+        tableView?.delegate = self
         fetchForecast()
     }
     
     fileprivate func fetchForecast() {
-        let request = FullcastRequest(cityId: city.id as! Int)
-        request.fetchData() { fetched in
-            if let result = fetched {
-                self.forecast = result
-                self.tableView?.reloadData()
+        if let cityId = city.id {
+            
+            let request = ForecastRequest(cityId: cityId)
+            
+            networking.sendRequest(request) { json, err in
+                if let response = json {
+                    self.forecast = Forecast(json: response)
+                }
             }
         }
     }
-
 }
 
 extension ForcastTableModel: UITableViewDataSource {
@@ -105,7 +111,7 @@ extension ForcastTableModel: UITableViewDelegate {
     }
 }
 
-private extension Fullcast {
+private extension Forecast {
     
     func speedLabel(index: Int) -> String {
         let data = self.forecast[index]

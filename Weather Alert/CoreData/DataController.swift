@@ -98,15 +98,22 @@ extension DataController {
         dataController.managedObjectContext.rollback()
     }
     
-    func requestCities() -> [City] {
+    func requestCoreData(entityName: String) -> [Any] {
         
-        let citiesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "City")
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
         do {
-            let fetchedCities = try dataController.managedObjectContext.fetch(citiesFetch) as! [City]
-            return fetchedCities
+            let fetched = try dataController.managedObjectContext.fetch(fetch)
+            return fetched
         } catch {
             fatalError("Failed to fetch employees: \(error)")
         }
+    }
+    
+    func fetchEntity(_ entityName: String) -> [NSManagedObject] {
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let results = try? dataController.managedObjectContext.fetch(request) 
+        return (results ?? []) as! [NSManagedObject]
     }
 }

@@ -11,22 +11,10 @@ import CoreData
 
 class SearchCityRequest: NetworkingRequest {
     
+    var path: String
+    var response: [String : Any]?
+    
     init(cityName: String) {
-        let path = "/weather?q=\(cityName)"
-        super.init(path: path)
+        path = "/weather?q=\(cityName)"
     }
-    
-    func response(completionHandler: @escaping (City?) -> Void) {
-        handleResponse() { result in
-            if let res = result, let entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: "City", in: self.dataController.managedObjectContext) {
-                
-                let object = City(entity: entity, insertInto: self.dataController.managedObjectContext, json: res)
-                completionHandler(object)
-            }
-            else {
-                completionHandler(nil)
-            }
-        }
-    }
-    
 }

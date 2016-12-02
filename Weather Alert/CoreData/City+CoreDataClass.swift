@@ -1,5 +1,5 @@
 //
-//  City+CoreDataClass.swift
+//  CoreCity+CoreDataClass.swift
 //  Weather Alert
 //
 //  Created by Aleksandr Kelbas on 11/11/2016.
@@ -13,9 +13,11 @@ protocol DataModel {
     func mapping(json: [String : Any])
 }
 
-class City: NSManagedObject, DataModel {
+class CoreCity: NSManagedObject, DataModel {
 
-    convenience init(entity: NSEntityDescription, insertInto: NSManagedObjectContext?, json: [String : Any]) {
+
+    convenience init(entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: "CoreCity", in: AppShared.instances.dataController.managedObjectContext)!, insertInto: NSManagedObjectContext? = AppShared.instances.dataController.managedObjectContext, json: [String : Any]) {
+        
         self.init(entity: entity, insertInto: insertInto)
         
         guard let _ = json["id"] as? NSNumber,

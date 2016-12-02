@@ -1,5 +1,5 @@
 //
-//  City+CoreDataProperties.swift
+//  CoreCity+CoreDataProperties.swift
 //  Weather Alert
 //
 //  Created by Jack Hopkins on 17/11/2016.
@@ -10,10 +10,10 @@ import CoreData
 import UIKit
 
 
-extension City {
+extension CoreCity {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<City> {
-        return NSFetchRequest<City>(entityName: "City");
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CoreCity> {
+        return NSFetchRequest<CoreCity>(entityName: "CoreCity");
     }
     
     @NSManaged public var name: String?
@@ -27,7 +27,7 @@ extension City {
     
 }
 
-extension City {
+extension CoreCity {
     
     
     var direction: String {

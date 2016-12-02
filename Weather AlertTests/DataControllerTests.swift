@@ -44,10 +44,10 @@ class DataControllerTests: XCTestCase {
             let jsonResult = self.loadJson(jsonFile: "SingleCity")
             XCTAssertNotNil(jsonResult, "Failed to load file")
             
-            let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "City", in: self.dataController.managedObjectContext)
+            let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "CoreCity", in: self.dataController.managedObjectContext)
             XCTAssertNotNil(entity, "Entity could not be found")
             
-            let object = City(entity: entity!, insertInto: self.dataController.managedObjectContext)
+            let object = CoreCity(entity: entity!, insertInto: self.dataController.managedObjectContext)
             object.mapping(json: jsonResult!)
             
             XCTAssertNotNil(object.id, "id shouldnt be nil")
@@ -103,10 +103,10 @@ class DataControllerTests: XCTestCase {
             
             for (idx, json) in list!.enumerated() {
                 
-                let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "City", in: self.dataController.managedObjectContext)
+                let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "CoreCity", in: self.dataController.managedObjectContext)
                 XCTAssertNotNil(entity, "Entity could not be found")
                 
-                let object = City(entity: entity!, insertInto: self.dataController.managedObjectContext)
+                let object = CoreCity(entity: entity!, insertInto: self.dataController.managedObjectContext)
                 
                 object.mapping(json: json)
                 
@@ -142,7 +142,7 @@ class DataControllerTests: XCTestCase {
             XCTAssertTrue(list!.count == count!, "List elements count doesnt match count variable")
             
             if let json = jsonResult {
-                _ = Fullcast(json: json)
+                _ = Forecast(json: json)
                 exp.fulfill()
             }
             

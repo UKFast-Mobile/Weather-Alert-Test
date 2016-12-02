@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MKQ-I0-Pnx" id="Per-f9-3QB">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="89"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknownImage" translatesAutoresizingMaskIntoConstraints="NO" id="qyY-1H-ewR">
@@ -74,14 +74,14 @@
                     <navigationItem key="navigationItem" title="Favourite Cities" id="jYd-W2-nOC">
                         <barButtonItem key="rightBarButtonItem" title="Search All" id="tQ7-BB-YKO">
                             <connections>
-                                <segue destination="5Kq-Zf-fpc" kind="show" id="xPx-rM-Xn3"/>
+                                <segue destination="5Kq-Zf-fpc" kind="show" id="zDg-ad-zsI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ced-hk-W9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4143" y="-418"/>
+            <point key="canvasLocation" x="-4049" y="-774"/>
         </scene>
         <!--City Search-->
         <scene sceneID="Cix-DM-fVL">
@@ -96,7 +96,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IBh-Iu-hfg" id="uEb-x0-SWD">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="89"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknownImage" translatesAutoresizingMaskIntoConstraints="NO" id="73X-3m-RfW">
@@ -158,7 +158,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-3054" y="-780"/>
+            <point key="canvasLocation" x="-4049" y="-50"/>
         </scene>
         <!--City Details-->
         <scene sceneID="AYA-eB-jDO">
@@ -180,7 +180,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="435"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1ff-z5-ien" id="cNb-or-de6">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="434"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="434.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swx-qZ-uDR">
@@ -241,7 +241,7 @@
                                         <rect key="frame" x="0.0" y="463" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F0Q-U1-Nap" id="VzJ-ha-sI1">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknownImage" translatesAutoresizingMaskIntoConstraints="NO" id="ydW-Xn-fH7">
@@ -308,7 +308,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uPM-0T-k83" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3055" y="-24"/>
+            <point key="canvasLocation" x="-3136" y="-435"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ast-Qu-Q2p">
@@ -321,19 +321,20 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="iJt-Bt-gFn" kind="relationship" relationship="rootViewController" id="8vh-Vn-q0P"/>
+                        <segue destination="5Kq-Zf-fpc" kind="relationship" relationship="rootViewController" id="Qn8-Es-NjD"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KbK-me-7QT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4945" y="-418"/>
+            <point key="canvasLocation" x="-4981" y="-435"/>
         </scene>
     </scenes>
     <resources>
         <image name="unknownImage" width="125" height="125"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Dbg-nj-NU5"/>
+        <segue reference="Qn8-Es-NjD"/>
+        <segue reference="P6p-9j-GA4"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.96470588235294119" green="0.65098039215686276" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
 </document>

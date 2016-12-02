@@ -17,8 +17,6 @@ class CityTableViewCell: UITableViewCell {
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var directionImage: UIImageView!
     
-    var city: City?
-
     // MARK: Functions
     
     override func awakeFromNib() {
