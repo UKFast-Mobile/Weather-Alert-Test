@@ -11,25 +11,10 @@ import CoreData
 
 class CityTableViewController: TableSearchViewController {
     
-    // MARK: Variables
-    
-    var searchCities: [City] = []
-    
     // MARK: Functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        searchController.searchResultsUpdater = self as UISearchResultsUpdating
-        searchController.dimsBackgroundDuringPresentation = false
-        definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
-        
-    }
-    
-    @IBAction func searchEditingChanged(_ sender: UITextField) {
-        dataController.store()
-        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,7 +31,7 @@ extension CityTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (searchIsActive ? filterCities.count : cities.count )
+        return ( searchIsActive ? filterCities.count : cities.count )
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,25 +40,16 @@ extension CityTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CityTableViewCell
         
         if searchIsActive {
-            return cellUsingCity(cell: cell, city: searchCities[indexPath.row])
+            return cellUsingCity(cell: cell, city: filterCities[indexPath.row])
         }
         else {
             return cellUsingCity(cell: cell, city: cities[indexPath.row])
         }
     }
     
-    func cellUsingCity(cell: CityTableViewCell, city: City) -> CityTableViewCell {
+    func cellUsingCity(cell: CityTableViewCell, city: CityProtocol) -> CityTableViewCell {
         
-        cell.nameLabel.text = city.name
-        cell.countryLabel.text = city.country
-        cell.directionImage.image = city.windDirectionImage
-        
-        return cell
-        
-    }
-    
-    func cellUsingCity(cell: CityTableViewCell, city: CoreCity) -> CityTableViewCell {
-        
+        cell.cityId = city.id
         cell.nameLabel.text = city.name
         cell.countryLabel.text = city.country
         cell.directionImage.image = city.windDirectionImage
@@ -84,6 +60,8 @@ extension CityTableViewController {
 }
 
 extension CityTableViewController {
+    
+    // MARK: Table Search View
     
     override func updateSearchResults(for searchController: UISearchController) {
 
@@ -100,21 +78,9 @@ extension CityTableViewController {
             networking.sendRequest(request) { json, err in
                 if let response = json {
                     let city = City(json: response)
-                    self.searchCities = [city]
+                    self.filterCities = [city]
                     self.tableView.reloadData()
                 }
-            }
-        }
-    }
-}
-
-extension CityTableViewController {
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let cell = sender as? CityTableViewCell {
-            if let destinationVC = segue.destination as? CityDetailsViewController {
-                destinationVC.cityName = cell.nameLabel.text
             }
         }
     }

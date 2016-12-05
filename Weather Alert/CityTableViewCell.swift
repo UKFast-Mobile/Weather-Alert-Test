@@ -13,6 +13,8 @@ class CityTableViewCell: UITableViewCell {
     
     // MARK: Variables
     
+    var cityId: NSNumber?
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var directionImage: UIImageView!

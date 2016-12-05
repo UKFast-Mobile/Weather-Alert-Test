@@ -9,16 +9,16 @@
 import Foundation
 import CoreData
 
-protocol DataModel {
-    func mapping(json: [String : Any])
-}
+class CoreCity: NSManagedObject, DataAccessable {
+    
+    var dataController: DataController = AppShared.instances.dataController
+    
 
-class CoreCity: NSManagedObject, DataModel {
 
-
-    convenience init(entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: "CoreCity", in: AppShared.instances.dataController.managedObjectContext)!, insertInto: NSManagedObjectContext? = AppShared.instances.dataController.managedObjectContext, json: [String : Any]) {
+    convenience init(entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: "CoreCity", in: AppShared.instances.dataController.managedObjectContext!)!, insertInto: NSManagedObjectContext = AppShared.instances.dataController.managedObjectContext, json: [String : Any]) {
         
         self.init(entity: entity, insertInto: insertInto)
+        
         
         guard let _ = json["id"] as? NSNumber,
             let _ = json["name"] as? String

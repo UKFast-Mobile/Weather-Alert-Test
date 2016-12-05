@@ -8,15 +8,40 @@
 
 import UIKit
 
+protocol DataAccessable {
+    
+    var dataController: DataController { get }
+}
+
+extension UIViewController: DataAccessable {
+    
+    var dataController: DataController { return AppShared.instances.dataController }
+    var networking: Networking { return AppShared.instances.networking }
+}
 
 class TableSearchViewController: UITableViewController {
     
     // MARK: Variables
     
     var cities: [CoreCity] = []
-    var filterCities: [CoreCity] = []
+    var filterCities: [CityProtocol] = []
     
     let searchController = UISearchController(searchResultsController: nil)
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        searchController.searchResultsUpdater = self as UISearchResultsUpdating
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        
+    }
+    
+    @IBAction func searchEditingChanged(_ sender: UITextField) {
+        dataController.store()
+        self.tableView.reloadData()
+    }
     
 }
 
@@ -46,5 +71,15 @@ extension TableSearchViewController: UISearchResultsUpdating {
             }
         }
         tableView.reloadData()
+    }
+}
+
+extension TableSearchViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let cell = sender as? CityTableViewCell, let destinationVC = segue.destination as? CityDetailsViewController {
+            destinationVC.cityId = cell.cityId
+        }
     }
 }

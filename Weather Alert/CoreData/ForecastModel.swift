@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Forecast: DataModel {
+class Forecast: DataModel {
     
     let name: String
     let id: NSNumber
