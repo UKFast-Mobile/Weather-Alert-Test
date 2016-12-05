@@ -37,18 +37,14 @@ class DataControllerTests: XCTestCase {
     
     func testMapSingleCity() {
         
-        let exp = expectation(description: "JSON converted to object successfully")
+        let exp = expectation(description: "JSON converted to CoreCity successfully")
         
         DispatchQueue.global().async {
             
             let jsonResult = self.loadJson(jsonFile: "SingleCity")
             XCTAssertNotNil(jsonResult, "Failed to load file")
             
-            let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "CoreCity", in: self.dataController.managedObjectContext)
-            XCTAssertNotNil(entity, "Entity could not be found")
-            
-            let object = CoreCity(entity: entity!, insertInto: self.dataController.managedObjectContext)
-            object.mapping(json: jsonResult!)
+            let object = CoreCity.cityFromJSON(jsonResult!)
             
             XCTAssertNotNil(object.id, "id shouldnt be nil")
             XCTAssertTrue(object.id?.intValue == 2643743, "id is incorrect")
@@ -71,8 +67,6 @@ class DataControllerTests: XCTestCase {
             XCTAssertNotNil(object.speed, "speed shouldnt be nil")
             XCTAssertEqual(object.speed,  1.5, "speed is incorrect")
             
-            
-            
             exp.fulfill()
             
         }
@@ -84,7 +78,7 @@ class DataControllerTests: XCTestCase {
     
     func testMapSeveralCity() {
         
-        let exp = expectation(description: "JSON converted to object successfully")
+        let exp = expectation(description: "JSON converted several CoreCity objects successfully")
         
         DispatchQueue.global().async {
             
@@ -103,12 +97,7 @@ class DataControllerTests: XCTestCase {
             
             for (idx, json) in list!.enumerated() {
                 
-                let entity: NSEntityDescription? = NSEntityDescription.entity(forEntityName: "CoreCity", in: self.dataController.managedObjectContext)
-                XCTAssertNotNil(entity, "Entity could not be found")
-                
-                let object = CoreCity(entity: entity!, insertInto: self.dataController.managedObjectContext)
-                
-                object.mapping(json: json)
+                let object = CoreCity.cityFromJSON(json)
                 
                 XCTAssertNotNil(object.id, "id shouldnt be nil")
                 XCTAssertEqual(object.id, idsToCompare[idx], "id shouldnt be nil")
@@ -126,7 +115,7 @@ class DataControllerTests: XCTestCase {
 
     func testMapForecast() {
         
-        let exp = expectation(description: "JSON converted to object successfully")
+        let exp = expectation(description: "JSON converted to Forecast successfully")
         
         DispatchQueue.global().async {
             
@@ -142,70 +131,13 @@ class DataControllerTests: XCTestCase {
             XCTAssertTrue(list!.count == count!, "List elements count doesnt match count variable")
             
             if let json = jsonResult {
-                _ = Forecast(json: json)
+                let forecast = Forecast(json: json)
+                XCTAssertEqual(forecast.id, 524901)
                 exp.fulfill()
             }
-            
-            exp.fulfill()
-            
         }
         
         waitForExpectations(timeout: 10.0) { (err) in
-            XCTAssertNil(err)
-        }
-    }
-    
-    
-    func testForecastRequest() {
-        let exp = expectation(description: "Forecast request failed")
-        
-//        let city = ForecastRequest(cityId: 524901)
-//
-//        city.response() { result in
-//            XCTAssertEqual(result[0].country, "RU")
-//            XCTAssertEqual(result[0].name, "Moscow")
-            exp.fulfill()
-//        }
-        
-        waitForExpectations(timeout: 10.0) { (err) in
-            XCTAssertNil(err)
-        }
-    }
-    
-    
-    
-    func testSingleCityRequest() {
-        let exp = expectation(description: "Single city request failed")
-        
-//        let city = SingleCityRequest(cityId: 524901)
-        
-//        city.response() { result in
-//            XCTAssertEqual(result.country, "RU")
-//            XCTAssertEqual(result.name, "Moscow")
-            exp.fulfill()
-//        }
-        
-        
-        self.waitForExpectations(timeout: 60.0) { (err) in
-            XCTAssertNil(err)
-        }
-    }
-    
-    
-    
-    func testSearchCityRequest() {
-        let exp = expectation(description: "Search city request failed")
-        
-        let city = SearchCityRequest(cityName: "London,UK")
-        
-        city.response() { result in
-//            XCTAssertEqual(result.country, "GB")
-//            XCTAssertEqual(result.name, "London")
-            exp.fulfill()
-        }
-        
-        
-        waitForExpectations(timeout: 60.0) { (err) in
             XCTAssertNil(err)
         }
     }

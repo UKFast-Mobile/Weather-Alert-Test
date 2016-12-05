@@ -12,9 +12,22 @@ import CoreData
 class CityTableViewController: TableSearchViewController {
     
     // MARK: Functions
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshCities()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        refreshCities()
+    }
+    
+    func refreshCities() {
+        if let cities = dataController.fetchEntity("CoreCity") as? [CoreCity] {
+            self.cities = cities
+        }
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,7 +62,7 @@ extension CityTableViewController {
     
     func cellUsingCity(cell: CityTableViewCell, city: CityProtocol) -> CityTableViewCell {
         
-        cell.cityId = city.id
+        cell.city = city
         cell.nameLabel.text = city.name
         cell.countryLabel.text = city.country
         cell.directionImage.image = city.windDirectionImage

@@ -25,7 +25,6 @@ protocol CityProtocol : DataModel {
 
 extension CityProtocol {
     
-    
     var direction: String {
         
         var direction: String = "Unknown"

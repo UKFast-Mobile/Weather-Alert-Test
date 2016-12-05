@@ -29,8 +29,7 @@ class CoreCity: NSManagedObject, DataAccessable {
     
     internal func mapping(json: [String : Any]) {
         
-        if let _ = favourite {}
-        else { favourite = false }
+        if favourite == nil { favourite = false }
         
         id = json["id"] as? NSNumber
         name = json["name"] as? String
@@ -49,5 +48,19 @@ class CoreCity: NSManagedObject, DataAccessable {
             deg = wind["deg"] as? NSNumber
             speed = wind["speed"] as? NSNumber
         }
+    }
+}
+
+
+extension CoreCity {
+    
+    class func cityFromJSON(_ json: [String : Any]) -> CoreCity {
+        if let id = json["id"] as? NSNumber,
+            let city = DataController.dataController.fetchEntity("CoreCity", withPredicate: NSPredicate(format: "id.intValue == %d", id.intValue), numberOfResultsLimit: 1).first as? CoreCity {
+            city.mapping(json: json)
+            return city
+        }
+        
+        return CoreCity(json: json)
     }
 }

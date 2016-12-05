@@ -35,7 +35,6 @@ class TableSearchViewController: UITableViewController {
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-        
     }
     
     @IBAction func searchEditingChanged(_ sender: UITextField) {
@@ -79,7 +78,7 @@ extension TableSearchViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let cell = sender as? CityTableViewCell, let destinationVC = segue.destination as? CityDetailsViewController {
-            destinationVC.cityId = cell.cityId
+            destinationVC.sendCity = cell.city
         }
     }
 }

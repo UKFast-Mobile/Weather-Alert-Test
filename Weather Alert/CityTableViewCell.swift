@@ -13,7 +13,7 @@ class CityTableViewCell: UITableViewCell {
     
     // MARK: Variables
     
-    var cityId: NSNumber?
+    var city: CityProtocol?
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!

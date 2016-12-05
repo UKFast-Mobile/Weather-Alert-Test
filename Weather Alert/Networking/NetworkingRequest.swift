@@ -22,7 +22,3 @@ extension NetworkingRequest {
     var networking: Networking { return AppShared.instances.networking }
     var dataController: DataController { return AppShared.instances.dataController }
 }
-
-//
-//var networking: Networking = AppShared.instances.networking
-//var dataController: DataController = AppShared.instances.dataController

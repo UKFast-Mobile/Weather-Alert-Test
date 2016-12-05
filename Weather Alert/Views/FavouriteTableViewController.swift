@@ -15,13 +15,19 @@ class FavouriteTableViewController: TableSearchViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let cities = dataController.fetchEntity("CoreCity") as? [CoreCity] {
-            self.cities = cities
-        }
+        refreshCities()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidLoad()
+        super.viewDidAppear(animated)
+        refreshCities()
+    }
+    
+    func refreshCities() {
+        let predicate = NSPredicate(format: "favourite == %@", String(describing: true as NSNumber))
+        if let cities = dataController.fetchEntity("CoreCity", withPredicate: predicate) as? [CoreCity] {
+            self.cities = cities
+        }
         tableView.reloadData()
     }
     
@@ -57,7 +63,7 @@ extension FavouriteTableViewController {
     
     func cellUsingCity(cell: CityTableViewCell, city: CityProtocol) -> CityTableViewCell {
         
-        cell.cityId = city.id
+        cell.city = city
         cell.nameLabel.text = city.name
         cell.countryLabel.text = city.country
         cell.directionImage.image = city.windDirectionImage
