@@ -69,17 +69,46 @@ class DataController {
     init() {}
     
     public func wasInitialised() -> Bool {
-        guard applicationDocumentsDirectory != nil else {
-            return false
-        }
-        guard managedObjectModel != nil else {
-            return false
-        }
-        guard persistentStoreCoordinator != nil else {
-            return false
-        }
+        guard applicationDocumentsDirectory != nil else { return false }
+        guard managedObjectModel != nil else { return false }
+        guard persistentStoreCoordinator != nil else { return false }
         return true
     }
+}
+
+extension DataController {
     
+    static var dataController: DataController { return AppShared.instances.dataController }
     
+    func store() {
+        do {
+            try DataController.dataController.managedObjectContext.save()
+        } catch {
+            fatalError("Failure to save context: \(error)")
+        }
+    }
+    
+    func discard() {
+        DataController.dataController.managedObjectContext.rollback()
+    }
+    
+    func requestCoreData(entityName: String) -> [Any] {
+        
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        
+        do {
+            let fetched = try DataController.dataController.managedObjectContext.fetch(fetch)
+            return fetched
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
+        }
+    }
+    
+    func fetchEntity(_ entityName: String, withPredicate predicate: NSPredicate? = nil, numberOfResultsLimit limit: Int? = nil) -> [NSManagedObject] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        request.predicate = predicate
+        if let l = limit { request.fetchLimit = l }
+        let results = try? DataController.dataController.managedObjectContext.fetch(request)
+        return (results ?? []) as! [NSManagedObject]
+    }
 }

@@ -1,5 +1,5 @@
 //
-//  City+CoreDataClass.swift
+//  CoreCity+CoreDataClass.swift
 //  Weather Alert
 //
 //  Created by Aleksandr Kelbas on 11/11/2016.
@@ -9,20 +9,34 @@
 import Foundation
 import CoreData
 
-protocol DataModel {
-    func mapping(json: [String : Any])
-}
+class CoreCity: NSManagedObject, DataAccessable {
+    
+    var dataController: DataController = AppShared.instances.dataController
+    
 
-public class City: NSManagedObject, DataModel {
+
+    convenience init(entity: NSEntityDescription = NSEntityDescription.entity(forEntityName: "CoreCity", in: AppShared.instances.dataController.managedObjectContext!)!, insertInto: NSManagedObjectContext = AppShared.instances.dataController.managedObjectContext, json: [String : Any]) {
+        
+        self.init(entity: entity, insertInto: insertInto)
+        
+        
+        guard let _ = json["id"] as? NSNumber,
+            let _ = json["name"] as? String
+            else { return }
+
+        mapping(json: json)
+    }
     
     internal func mapping(json: [String : Any]) {
+        
+        if favourite == nil { favourite = false }
         
         id = json["id"] as? NSNumber
         name = json["name"] as? String
         
         if let sys = json["sys"] as? [String : Any] {
             country = sys["country"] as? String
-
+            
         }
         
         if let coord = json["coord"] as? [String : Any] {
@@ -34,5 +48,19 @@ public class City: NSManagedObject, DataModel {
             deg = wind["deg"] as? NSNumber
             speed = wind["speed"] as? NSNumber
         }
+    }
+}
+
+
+extension CoreCity {
+    
+    class func cityFromJSON(_ json: [String : Any]) -> CoreCity {
+        if let id = json["id"] as? NSNumber,
+            let city = DataController.dataController.fetchEntity("CoreCity", withPredicate: NSPredicate(format: "id.intValue == %d", id.intValue), numberOfResultsLimit: 1).first as? CoreCity {
+            city.mapping(json: json)
+            return city
+        }
+        
+        return CoreCity(json: json)
     }
 }
